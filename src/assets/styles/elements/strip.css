@@ -1,0 +1,158 @@
+/* Strip shadow based */
+
+.strip005  { --uStripOpacity: 0.05; }
+.strip0075 { --uStripOpacity: 0.075; }
+.strip01   { --uStripOpacity: 0.1; }
+.strip02   { --uStripOpacity: 0.2; }
+
+.uStrip.stripD,
+.uStripIn.stripD,
+.uStripInner.stripD,
+.elzTheme-dark  .uStrip.stripDD,
+.elzTheme-dark  .uStripIn.stripDD,
+.elzTheme-dark  .uStripInner.stripDD,
+.elzTheme-light .uStrip.stripDL,
+.elzTheme-light .uStripIn.stripDL,
+.elzTheme-light .uStripInner.stripDL { --uStripL: 0; }
+
+.uStrip.stripL,
+.uStripIn.stripL,
+.uStripInner.stripL,
+.elzTheme-dark  .uStrip.stripLD,
+.elzTheme-dark  .uStripIn.stripLD,
+.elzTheme-dark  .uStripInner.stripLD,
+.elzTheme-light .uStrip.stripLL,
+.elzTheme-light .uStripIn.stripLL,
+.elzTheme-light .uStripInner.stripLL { --uStripL: 100%; }
+
+.uStrip      > *,
+
+.uStripIn    > *,
+.uStripIn    > * > *,
+
+.uStripInner > *,
+.uStripInner > * > *,
+.uStripInner > * > * > * {
+    box-shadow:
+            inset 0 0 0 1024px hsla(0, 0%, var(--uStripL, 0%), calc(var(--uStripOpacity, 0.025) * var(--uStripHover, 0))),
+            inset 0 0 0 1024px hsla(0, 0%, var(--uStripL, 0%), calc(var(--uStripOpacity, 0.025) * var(--uStripSelect, 0))),
+            inset 0 0 0 1024px hsla(0, 0%, var(--uStripL, 0%), calc(var(--uStripOpacity, 0.025) * var(--uStripEnable, 0)));
+}
+
+
+
+.uStrip.stripEven > *:nth-child(even),
+
+.uStripIn.stripEven > *:nth-child(even) > *,
+.uStripIn > .stripEven:nth-child(even) > *,
+
+.uStripIn.stripEvenR > * > *:nth-child(even),
+.uStripIn > .stripEvenR > *:nth-child(even),
+
+.uStripInner.stripEven > * > *:nth-child(even) > *,
+.uStripInner > .stripEven > *:nth-child(even) > *,
+.uStripInner > * > .stripEven:nth-child(even) > *,
+
+.uStripInner.stripEvenR > * > * > *:nth-child(even),
+.uStripInner > .stripEvenR > * > *:nth-child(even),
+.uStripInner > * > .stripEvenR > *:nth-child(even),
+
+.uStrip.stripOdd > *:nth-child(odd),
+
+.uStripIn.stripOdd > *:nth-child(odd) > *,
+.uStripIn > .stripOdd:nth-child(odd) > *,
+
+.uStripIn.stripOddR > * > *:nth-child(odd),
+.uStripIn > .stripOddR > *:nth-child(odd),
+
+.uStripInner.stripOdd > * > *:nth-child(odd) > *,
+.uStripInner > .stripOdd > *:nth-child(odd) > *,
+.uStripInner > * > .stripOdd:nth-child(odd) > *,
+
+.uStripInner.stripOddR > * > * > *:nth-child(odd),
+.uStripInner > .stripOddR > * > *:nth-child(odd),
+.uStripInner > * > .stripOddR > *:nth-child(odd) { --uStripEnable: 1; }
+
+
+.uStrip.stripHover      > *:hover,
+.uStrip.stripHover      > *:active,
+
+.uStripIn.stripHover    > *:hover  > *,
+.uStripIn.stripHover    > *:active > *,
+.uStripIn > .stripHover:hover  > *,
+.uStripIn > .stripHover:active > *,
+.uStripInner.stripHover > * > *:hover  > *,
+.uStripInner.stripHover > * > *:active > *,
+.uStripInner > .stripHover > *:hover  > *,
+.uStripInner > .stripHover > *:active > *,
+.uStripInner > * > .stripHover:hover  > *,
+.uStripInner > * > .stripHover:active > * { --uStripHover: 1; }
+
+
+.uStrip.stripHover.stripEven > *:nth-child(odd):hover,
+
+.uStripIn.stripHover.stripEven > *:nth-child(odd):hover  > *,
+.uStripIn.stripEven  > .stripHover:nth-child(odd):hover  > *,
+.uStripIn.stripHover > .stripEven:nth-child(odd):hover  > *,
+.uStripIn > .stripHover.stripEven:nth-child(odd):hover  > *,
+
+.uStripInner.stripHover.stripEven > * > *:nth-child(odd):hover > *,
+.uStripInner.stripHover > .stripEven > *:nth-child(odd):hover  > *,
+.uStripInner.stripHover > * > .stripEven:nth-child(odd):hover  > *,
+
+.uStripInner.stripEven > .stripHover > *:nth-child(odd):hover  > *,
+.uStripInner.stripEven > * > .stripHover:nth-child(odd):hover  > *,
+
+.uStripInner > .stripEven.stripHover > *:nth-child(odd):hover > *,
+.uStripInner > .stripEven > .stripHover:nth-child(odd):hover  > *,
+
+.uStripInner > * > .stripEven.stripHover:nth-child(odd):hover > *,
+
+
+.uStrip.stripHover.stripOdd > *:nth-child(even):hover,
+
+.uStripIn.stripHover.stripOdd > *:nth-child(even):hover  > *,
+.uStripIn.stripOdd  > .stripHover:nth-child(even):hover  > *,
+.uStripIn.stripHover > .stripOdd:nth-child(even):hover  > *,
+.uStripIn > .stripHover.stripOdd:nth-child(even):hover  > *,
+
+.uStripInner.stripHover.stripOdd > * > *:nth-child(even):hover > *,
+.uStripInner.stripHover > .stripOdd > *:nth-child(even):hover  > *,
+.uStripInner.stripHover > * > .stripOdd:nth-child(even):hover  > *,
+
+.uStripInner.stripOdd > .stripHover > *:nth-child(even):hover  > *,
+.uStripInner.stripOdd > * > .stripHover:nth-child(even):hover  > *,
+
+.uStripInner > .stripOdd.stripHover > *:nth-child(even):hover > *,
+.uStripInner > .stripOdd > .stripHover:nth-child(even):hover  > *,
+
+.uStripInner > * > .stripOdd.stripHover:nth-child(even):hover > * { --uStripHover: 2; }
+
+
+.stripNoHover,
+.stripNoHoverIn > *,
+.stripNoHoverInner > * > * { --uStripHover: 0; }
+
+
+
+.stripSel,
+.stripSelInCol1  > * > *:nth-child(1),  .stripSelInnerCol1  > * > * > *:nth-child(1),  .stripSelRow1:nth-child(1),   .stripSelInRow1  > *:nth-child(1)  > *, .stripSelInnerRow1  > * > *:nth-child(1)  > *,
+.stripSelInCol2  > * > *:nth-child(2),  .stripSelInnerCol2  > * > * > *:nth-child(2),  .stripSelRow2:nth-child(2),   .stripSelInRow2  > *:nth-child(2)  > *, .stripSelInnerRow2  > * > *:nth-child(2)  > *,
+.stripSelInCol3  > * > *:nth-child(3),  .stripSelInnerCol3  > * > * > *:nth-child(3),  .stripSelRow3:nth-child(3),   .stripSelInRow3  > *:nth-child(3)  > *, .stripSelInnerRow3  > * > *:nth-child(3)  > *,
+.stripSelInCol4  > * > *:nth-child(4),  .stripSelInnerCol4  > * > * > *:nth-child(4),  .stripSelRow4:nth-child(4),   .stripSelInRow4  > *:nth-child(4)  > *, .stripSelInnerRow4  > * > *:nth-child(4)  > *,
+.stripSelInCol5  > * > *:nth-child(5),  .stripSelInnerCol5  > * > * > *:nth-child(5),  .stripSelRow5:nth-child(5),   .stripSelInRow5  > *:nth-child(5)  > *, .stripSelInnerRow5  > * > *:nth-child(5)  > *,
+.stripSelInCol6  > * > *:nth-child(6),  .stripSelInnerCol6  > * > * > *:nth-child(6),  .stripSelRow6:nth-child(6),   .stripSelInRow6  > *:nth-child(6)  > *, .stripSelInnerRow6  > * > *:nth-child(6)  > *,
+.stripSelInCol7  > * > *:nth-child(7),  .stripSelInnerCol7  > * > * > *:nth-child(7),  .stripSelRow7:nth-child(7),   .stripSelInRow7  > *:nth-child(7)  > *, .stripSelInnerRow7  > * > *:nth-child(7)  > *,
+.stripSelInCol8  > * > *:nth-child(8),  .stripSelInnerCol8  > * > * > *:nth-child(8),  .stripSelRow8:nth-child(8),   .stripSelInRow8  > *:nth-child(8)  > *, .stripSelInnerRow8  > * > *:nth-child(8)  > *,
+.stripSelInCol9  > * > *:nth-child(9),  .stripSelInnerCol9  > * > * > *:nth-child(9),  .stripSelRow9:nth-child(9),   .stripSelInRow9  > *:nth-child(9)  > *, .stripSelInnerRow9  > * > *:nth-child(9)  > *,
+.stripSelInCol10 > * > *:nth-child(10), .stripSelInnerCol10 > * > * > *:nth-child(10), .stripSelRow10:nth-child(10), .stripSelInRow10 > *:nth-child(10) > *, .stripSelInnerRow10 > * > *:nth-child(10) > *,
+.stripSelInCol11 > * > *:nth-child(11), .stripSelInnerCol11 > * > * > *:nth-child(11), .stripSelRow11:nth-child(11), .stripSelInRow11 > *:nth-child(11) > *, .stripSelInnerRow11 > * > *:nth-child(11) > *,
+.stripSelInCol12 > * > *:nth-child(12), .stripSelInnerCol12 > * > * > *:nth-child(12), .stripSelRow12:nth-child(12), .stripSelInRow12 > *:nth-child(12) > *, .stripSelInnerRow12 > * > *:nth-child(12) > *,
+.stripSelInCol13 > * > *:nth-child(13), .stripSelInnerCol13 > * > * > *:nth-child(13), .stripSelRow13:nth-child(13), .stripSelInRow13 > *:nth-child(13) > *, .stripSelInnerRow13 > * > *:nth-child(13) > *,
+.stripSelInCol14 > * > *:nth-child(14), .stripSelInnerCol14 > * > * > *:nth-child(14), .stripSelRow14:nth-child(14), .stripSelInRow14 > *:nth-child(14) > *, .stripSelInnerRow14 > * > *:nth-child(14) > *,
+.stripSelInCol15 > * > *:nth-child(15), .stripSelInnerCol15 > * > * > *:nth-child(15), .stripSelRow15:nth-child(15), .stripSelInRow15 > *:nth-child(15) > *, .stripSelInnerRow15 > * > *:nth-child(15) > *,
+.stripSelInCol16 > * > *:nth-child(16), .stripSelInnerCol16 > * > * > *:nth-child(16), .stripSelRow16:nth-child(16), .stripSelInRow16 > *:nth-child(16) > *, .stripSelInnerRow16 > * > *:nth-child(16) > *,
+.stripSelInCol17 > * > *:nth-child(17), .stripSelInnerCol17 > * > * > *:nth-child(17), .stripSelRow17:nth-child(17), .stripSelInRow17 > *:nth-child(17) > *, .stripSelInnerRow17 > * > *:nth-child(17) > *,
+.stripSelInCol18 > * > *:nth-child(18), .stripSelInnerCol18 > * > * > *:nth-child(18), .stripSelRow18:nth-child(18), .stripSelInRow18 > *:nth-child(18) > *, .stripSelInnerRow18 > * > *:nth-child(18) > *,
+.stripSelInCol19 > * > *:nth-child(19), .stripSelInnerCol19 > * > * > *:nth-child(19), .stripSelRow19:nth-child(19), .stripSelInRow19 > *:nth-child(19) > *, .stripSelInnerRow19 > * > *:nth-child(19) > *,
+.stripSelInCol20 > * > *:nth-child(20), .stripSelInnerCol20 > * > * > *:nth-child(20), .stripSelRow20:nth-child(20), .stripSelInRow20 > *:nth-child(20) > *, .stripSelInnerRow20 > * > *:nth-child(20) > *  { --uStripSelect: 2; }

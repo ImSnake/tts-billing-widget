@@ -1,0 +1,39 @@
+.elzTable > *:not(.cbx),
+.elzTable > * > *:not(.cbx),
+.elzTable > * > * > *:not(.cbx) { box-sizing: inherit; }
+
+.elzTable > *:not(.bold),
+.elzTable > * > *:not(.bold),
+.elzTable > * > * > *:not(.bold) { font-weight:  inherit; }
+
+.elzTable > *:not(.va-T):not(.va-M):not(.va-B),
+.elzTable > * > *:not(.va-T):not(.va-M):not(.va-B),
+.elzTable > * > * > *:not(.va-T):not(.va-M):not(.va-B) { vertical-align: inherit; }
+
+.elzTable > *:not(.al-left):not(.al-center):not(.al-right):not(.al-justify),
+.elzTable > * > *:not(.al-left):not(.al-center):not(.al-right):not(.al-justify),
+.elzTable > * > * > *:not(.al-left):not(.al-center):not(.al-right):not(.al-justify) { text-align: inherit; }
+
+.elzTable > *:not(.pad),
+.elzTable > * > *:not(.pad),
+.elzTable > * > * > *:not(.pad) { padding: inherit; }
+
+.elzTable > *:not(.brw),
+.elzTable > * > *:not(.brw),
+.elzTable > * > * > *:not(.brw) { border-width: inherit; }
+
+.elzTable > *:not(.bg),
+.elzTable > * > *:not(.bg),
+.elzTable > * > * > *:not(.bg) { background-color: inherit; }
+
+.elzTable > *:not(.br),
+.elzTable > * > *:not(.br),
+.elzTable > * > * > *:not(.br) { border-color: inherit; }
+
+.elzTable > *:not(.fn),
+.elzTable > * > *:not(.fn),
+.elzTable > * > * > *:not(.fn) { color: inherit; }
+
+.elzTable > *:not(.br-solid):not(.br-dashed):not(.br-dotted):not(.br-double),
+.elzTable > * > *:not(.br-solid):not(.br-dashed):not(.br-dotted):not(.br-double),
+.elzTable > * > * > *:not(.br-solid):not(.br-dashed):not(.br-dotted):not(.br-double) { border-style: inherit; }

@@ -1,0 +1,132 @@
+.elzScroll,
+.elzScrollWrap {
+    grid-template-columns: 1fr auto;
+    grid-template-rows:    1fr auto;
+}
+
+.elzScrollWrap {
+    display: grid;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Body scroll settings */
+
+body > .elzScrollWrap {
+    position: fixed;
+    top:  0;
+    left: 0;
+    width:  100%;
+    height: 100%;
+    z-index: 99;
+}
+
+.elizeUI.p-fixed ~ .elzScrollWrap {
+    top: var(--elzEPSize, 0);
+    height: calc(100% - var(--elzEPSize, 0));
+}
+
+/* end */
+
+.elzScrollIn,
+.elzScrollWrap { grid-area: 1 / 1 / 3 / 3; }
+
+.elzScrollWrap > .scrollX { grid-area: 2 / 1 / 3 / 2; }
+.elzScrollWrap > .scrollY { grid-area: 1 / 2 / 2 / 3; }
+.elzScrollWrap > .scrollC { grid-area: 2 / 2 / 3 / 3; }
+
+.elzScrollbar {
+    position: relative;
+    display: flex;
+    pointer-events: auto;
+}
+
+.elzScrollbar.scrollX, .elzScrollbar.scrollX .elzScrollThumb { flex-direction: row; }
+.elzScrollbar.scrollY, .elzScrollbar.scrollY .elzScrollThumb { flex-direction: column; }
+
+.elzScrollArrow,
+.elzScrollCorner {
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+}
+
+.elzScrollTrack {
+    position: relative;
+    display: block;
+    flex-grow: 1;
+}
+
+.elzScrollSize {
+    display: block;
+    height: 100%;
+}
+
+.elzScrollThumb {
+    position: absolute;
+    display: flex;
+    top:  0;
+    left: 0;
+}
+
+.elzScrollThumb:before {
+    content: "";
+    flex-grow: 1;
+}
+
+.elzScrollbar.scrollX .elzScrollThumb { bottom: 0; }
+.elzScrollbar.scrollY .elzScrollThumb { right:  0; }
+
+
+
+
+
+
+
+
+
+
+/* Simple style */
+
+.scrollSimple > .elzScrollWrap .elzScrollCorner,
+.scrollSimple > .elzScrollWrap .elzScrollArrow { display: none; }
+
+.scrollSimple > .elzScrollWrap .elzScrollThumb { padding: 2px; }
+
+.scrollSimple > .elzScrollWrap .elzScrollThumb:before {
+    border-radius: 1024px;
+    transition-duration: 0.1s;
+    align-self: flex-end;
+}
+
+.elzTheme-dark  .scrollSimple > .elzScrollWrap .elzScrollThumb:before { background: hsla(0, 0%, 100%, 0.25); }
+.elzTheme-light .scrollSimple > .elzScrollWrap .elzScrollThumb:before { background: hsla(0, 0%, 0%, 0.25); }
+
+.elzTheme-dark  .scrollSimple > .elzScrollWrap .elzScrollThumb:hover:before,
+.elzTheme-dark  .scrollSimple > .elzScrollWrap .elzScrollThumb:active:before { background: hsla(0, 0%, 100%, 0.5); }
+.elzTheme-dark  .scrollSimple > .elzScrollWrap .elzScrollThumb:active:before { background: hsla(0, 0%, 100%, 0.5); }
+.elzTheme-light .scrollSimple > .elzScrollWrap .elzScrollThumb:hover:before,
+.elzTheme-light .scrollSimple > .elzScrollWrap .elzScrollThumb:active:before { background: hsla(0, 0%, 0%, 0.5); }
+
+.scrollSimple > .elzScrollWrap .scrollX { height: 12px; }
+.scrollSimple > .elzScrollWrap .scrollY { width:  12px; }
+
+.scrollSimple > .elzScrollWrap .scrollX .elzScrollThumb:before { height: 4px; }
+.scrollSimple > .elzScrollWrap .scrollY .elzScrollThumb:before { width:  4px; }
+
+
+
+
+
+
+
+
+
+
+/* Test colors */
+/*
+.elzScrollbar    { background: #f0f; }
+.elzScrollArrow  { background: #f00; }
+.elzScrollThumb  { background: #0ff; }
+.elzScrollCorner { background: #0f0; }
+*/
