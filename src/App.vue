@@ -1,7 +1,7 @@
 <script>
 import { sendUser } from "./api";
 import Account from "@/components/Account";
-import Services from "@/components/Servicies";
+import Services from "@/components/Services";
 import Sessions from "@/components/Sessions";
 
 export default {
