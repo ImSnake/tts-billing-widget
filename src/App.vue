@@ -117,8 +117,8 @@ export default {
   <div class="elz d-block pAT16 lh-12">
     <div class="elz d-block fn-16 pB8">ФГБУ РЭА Минэнерго России</div>
     <div class="elz d-flex f-wrap mL-16 pB16">
-      <div class="elz d-block mL16 mT8">ID: <b class="bold">50935</b></div>
-      <div class="elz d-block mL16 mT8">Code: <b class="bold">1750935</b></div>
+      <div class="elz d-block mL16 mT8">ID: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov">50935</a></div>
+      <div class="elz d-block mL16 mT8">Code: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov">1750935</a></div>
       <div class="elz d-block mL16 mT8">
         Телефон: <b class="bold nowrap">+7 925 772 69 19</b>
       </div>
@@ -131,7 +131,7 @@ export default {
   <div class="elz h48 borB1 br br-primary brL-20 brLInvD brLF-10 brFD">
     <div class="elz d-flex h100p">
       <div @click="switchBookmark($event.currentTarget, 'services')"
-        class="billingBookmarkTitle elz d-flex pH16 opAct07 sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
+        class="billingBookmarkTitle elz d-flex pH16 opAct07 cur-pointer sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
          fnHovLInvD fnSelLInvD sel">
         <div class="elz p-rel d-flex a-X">
           <div class="elz d-block nowrap">Договоры и услуги</div>
@@ -139,7 +139,7 @@ export default {
         </div>
       </div>
       <div @click="switchBookmark($event.currentTarget, 'account')"
-        class="billingBookmarkTitle elz d-flex pH16 opAct07 sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
+        class="billingBookmarkTitle elz d-flex pH16 opAct07 cur-pointer sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
          fnHovLInvD fnSelLInvD">
         <div class="elz p-rel d-flex a-X">
           <div class="elz d-block nowrap">Лицевой счет</div>
@@ -147,7 +147,7 @@ export default {
         </div>
       </div>
       <div @click="switchBookmark($event.currentTarget, 'sessions')"
-        class="billingBookmarkTitle elz d-flex pH16 opAct07 sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
+        class="billingBookmarkTitle elz d-flex pH16 opAct07 cur-pointer sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
          fnHovLInvD fnSelLInvD">
         <div class="elz p-rel d-flex a-X">
           <div class="elz d-block nowrap">VPN Сессии</div>
