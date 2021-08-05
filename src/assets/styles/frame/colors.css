@@ -255,7 +255,15 @@
 .br-white, .brHov-white:hover, .cHovOut:hover .brHovIn-white, .cHovOut1:hover .brHovIn1-white, .cHovOut2:hover .brHovIn2-white, .brHov-white:active, .cHovOut:active .brHovIn-white, .cHovOut1:active .brHovIn1-white, .cHovOut2:active .brHovIn2-white, .brAct-white:active:active, .cActOut:active:active .brActIn-white, .brSel-white.sel.sel.sel, .cSelOut.sel.sel.sel .brSelIn-white, .brChk-white:checked:checked, .cLblSib:checked:checked + .brLblLing-white, .cLbtSib:checked:checked ~ .brLbtLing-white, .brFoc-white:focus:focus, .brFow-white:focus-within:focus-within { --br-H-main: var(--c-white-H); --br-S-main: var(--c-white-S); --br-L-main: var(--c-white-L); }
 .fn-white, .fnHov-white:hover, .cHovOut:hover .fnHovIn-white, .cHovOut1:hover .fnHovIn1-white, .cHovOut2:hover .fnHovIn2-white, .fnHov-white:active, .cHovOut:active .fnHovIn-white, .cHovOut1:active .fnHovIn1-white, .cHovOut2:active .fnHovIn2-white, .fnAct-white:active:active, .cActOut:active:active .fnActIn-white, .fnSel-white.sel.sel.sel, .cSelOut.sel.sel.sel .fnSelIn-white, .fnChk-white:checked:checked, .cLblSib:checked:checked + .fnLblLing-white, .cLbtSib:checked:checked ~ .fnLbtLing-white, .fnFoc-white:focus:focus, .fnFow-white:focus-within:focus-within { --fn-H-main: var(--c-white-H); --fn-S-main: var(--c-white-S); --fn-L-main: var(--c-white-L); }
 
+/* Male color */
+.bg-male { --bg-H-main: var(--c-male-H); --bg-S-main: var(--c-male-S); --bg-L-main: var(--c-male-L); }
+.br-male { --br-H-main: var(--c-male-H); --br-S-main: var(--c-male-S); --br-L-main: var(--c-male-L); }
+.fn-male { --fn-H-main: var(--c-male-H); --fn-S-main: var(--c-male-S); --fn-L-main: var(--c-male-L); }
 
+/* Female color */
+.bg-female { --bg-H-main: var(--c-female-H); --bg-S-main: var(--c-female-S); --bg-L-main: var(--c-female-L); }
+.br-female { --br-H-main: var(--c-female-H); --br-S-main: var(--c-female-S); --br-L-main: var(--c-female-L); }
+.fn-female { --fn-H-main: var(--c-female-H); --fn-S-main: var(--c-female-S); --fn-L-main: var(--c-female-L); }
 
 
 

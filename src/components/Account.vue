@@ -20,10 +20,10 @@ export default {
   <div v-if="bookmarkIsActive" class="d-block">
      <div class="elz d-table w100p pH16 pB16">
 
-       <table class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1 uStripInner stripLD borNoneInner   bg bg-primary bgL5    stripSelInnerCol4">
-         <thead class="elz pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
-         <tr>
-           <td class="wmn240 h56">
+       <table class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1 uStrip stripLD borNoneIn   bg bg-primary bgL5    stripSelCol4">
+         <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
+         <tr class="tr">
+           <td class="td wmn240 h56">
 
              <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut sel">
 
@@ -65,7 +65,7 @@ export default {
              </div>
 
            </td>
-           <td class="w240 wmn240">
+           <td class="td w240 wmn240">
 
              <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut sel">
 
@@ -102,10 +102,10 @@ export default {
 
              </div>
            </td>
-           <td class="w64 wmn64">
+           <td class="td w64 wmn64">
              <div class="elz d-block bold">Рубль</div>
            </td>
-           <td class="w150 wmn150">
+           <td class="td w150 wmn150">
              <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
 
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
@@ -145,7 +145,7 @@ export default {
 
              </div>
            </td>
-           <td class="w150 wmn150">
+           <td class="td w150 wmn150">
              <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut sel">
 
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
@@ -294,111 +294,111 @@ export default {
 
              </div>
            </td>
-           <td class="w120 wmn120">
+           <td class="td w120 wmn120">
              <div class="elz d-block bold">Доп. соглашение</div>
            </td>
-           <td class="w160 wmn160">
+           <td class="td w160 wmn160">
              <div class="elz d-block bold">Блокировка</div>
            </td>
-           <td class="w100 wmn100">
+           <td class="td w100 wmn100">
              <div class="elz d-block bold">Лицевой счет</div>
            </td>
-           <td class="w100 wmn100">
+           <td class="td w100 wmn100">
              <div class="elz d-block bold">Баланс</div>
            </td>
          </tr>
          </thead>
-         <tbody class="elz pad p8 stripOdd stripHover">
-         <tr>
-           <td>
+         <tbody class="elz tbody pad p8 stripOdd stripHover">
+         <tr class="tr">
+           <td class="td">
              <div class="d-block pL32">71940168</div>
            </td>
-           <td class="bold">66963.4300</td>
-           <td>Рубль</td>
-           <td><div class="d-block pL32">2021.01.13</div></td>
-           <td><div class="d-block pL32">Неопределенно</div></td>
-           <td>Д/С № Н#999</td>
-           <td>Блокировка отсутствует</td>
-           <td></td>
-           <td></td>
+           <td class="td bold">66963.4300</td>
+           <td class="td">Рубль</td>
+           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
+           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
+           <td class="td">Д/С № Н#999</td>
+           <td class="td">Блокировка отсутствует</td>
+           <td class="td"></td>
+           <td class="td"></td>
          </tr>
-         <tr>
-           <td>
+         <tr class="tr">
+           <td class="td">
              <div class="d-block pL32">71940168</div>
            </td>
-           <td class="bold">66963.4300</td>
-           <td>Рубль</td>
-           <td><div class="d-block pL32">2021.01.13</div></td>
-           <td><div class="d-block pL32">Неопределенно</div></td>
-           <td>Д/С № Н#999</td>
-           <td>Блокировка отсутствует</td>
-           <td></td>
-           <td></td>
+           <td class="td bold">66963.4300</td>
+           <td class="td">Рубль</td>
+           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
+           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
+           <td class="td">Д/С № Н#999</td>
+           <td class="td">Блокировка отсутствует</td>
+           <td class="td"></td>
+           <td class="td"></td>
          </tr>
-         <tr>
-           <td>
+         <tr class="tr">
+           <td class="td">
              <div class="d-block pL32">71940168</div>
            </td>
-           <td class="bold">66963.4300</td>
-           <td>Рубль</td>
-           <td><div class="d-block pL32">2021.01.13</div></td>
-           <td><div class="d-block pL32">Неопределенно</div></td>
-           <td>Д/С № Н#999</td>
-           <td>Блокировка отсутствует</td>
-           <td></td>
-           <td></td>
+           <td class="td bold">66963.4300</td>
+           <td class="td">Рубль</td>
+           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
+           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
+           <td class="td">Д/С № Н#999</td>
+           <td class="td">Блокировка отсутствует</td>
+           <td class="td"></td>
+           <td class="td"></td>
          </tr>
-         <tr>
-           <td>
+         <tr class="tr">
+           <td class="td">
              <div class="d-block pL32">71940168</div>
            </td>
-           <td class="bold">66963.4300</td>
-           <td>Рубль</td>
-           <td><div class="d-block pL32">2021.01.13</div></td>
-           <td><div class="d-block pL32">Неопределенно</div></td>
-           <td>Д/С № Н#999</td>
-           <td>Блокировка отсутствует</td>
-           <td></td>
-           <td></td>
+           <td class="td bold">66963.4300</td>
+           <td class="td">Рубль</td>
+           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
+           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
+           <td class="td">Д/С № Н#999</td>
+           <td class="td">Блокировка отсутствует</td>
+           <td class="td"></td>
+           <td class="td"></td>
          </tr>
-         <tr>
-           <td>
+         <tr class="tr">
+           <td class="td">
              <div class="d-block pL32">71940168</div>
            </td>
-           <td class="bold">66963.4300</td>
-           <td>Рубль</td>
-           <td><div class="d-block pL32">2021.01.13</div></td>
-           <td><div class="d-block pL32">Неопределенно</div></td>
-           <td>Д/С № Н#999</td>
-           <td>Блокировка отсутствует</td>
-           <td></td>
-           <td></td>
+           <td class="td bold">66963.4300</td>
+           <td class="td">Рубль</td>
+           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
+           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
+           <td class="td">Д/С № Н#999</td>
+           <td class="td">Блокировка отсутствует</td>
+           <td class="td"></td>
+           <td class="td"></td>
          </tr>
-         <tr>
-           <td>
+         <tr class="tr">
+           <td class="td">
              <div class="d-block pL32">71940168</div>
            </td>
-           <td class="bold">66963.4300</td>
-           <td>Рубль</td>
-           <td><div class="d-block pL32">2021.01.13</div></td>
-           <td><div class="d-block pL32">Неопределенно</div></td>
-           <td>Д/С № Н#999</td>
-           <td>Блокировка отсутствует</td>
-           <td></td>
-           <td></td>
+           <td class="td bold">66963.4300</td>
+           <td class="td">Рубль</td>
+           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
+           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
+           <td class="td">Д/С № Н#999</td>
+           <td class="td">Блокировка отсутствует</td>
+           <td class="td"></td>
+           <td class="td"></td>
          </tr>
-         <tr>
-           <td>
+         <tr class="tr">
+           <td class="td">
              <div class="d-block pL32">71940168</div>
            </td>
-           <td class="bold">66963.4300</td>
-           <td>Рубль</td>
-           <td><div class="d-block pL32">2021.01.13</div></td>
-           <td><div class="d-block pL32">Неопределенно</div></td>
-           <td>Д/С № Н#999</td>
-           <td>Блокировка отсутствует</td>
-           <td></td>
-           <td></td>
+           <td class="td bold">66963.4300</td>
+           <td class="td">Рубль</td>
+           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
+           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
+           <td class="td">Д/С № Н#999</td>
+           <td class="td">Блокировка отсутствует</td>
+           <td class="td"></td>
+           <td class="td"></td>
          </tr>
          </tbody>
        </table>
