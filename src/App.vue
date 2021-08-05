@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       billingData: {
-        servicesData: { services: "services" },
+        servicesData: { },
         accountData: { account: "account" },
         sessionsData: { sessions: "sessions" },
       },
@@ -29,6 +29,7 @@ export default {
   mounted() {},
 
   methods: {
+
     switchBookmark(elem, refName) {
       document.querySelectorAll(".billingBookmarkTitle").forEach((el) => {
         el.classList.remove("sel");
@@ -102,11 +103,6 @@ export default {
         });
         contract.totalCost = summary;
       });
-        /* var sum = array.reduce(function(a, b){
-          return a + b;
-        }, 0);
-
-        console.log(sum);*/
 
       this.billingData.servicesData = sortedData;
 

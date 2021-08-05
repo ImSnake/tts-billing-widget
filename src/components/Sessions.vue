@@ -11,7 +11,7 @@ export default {
     return { bookmarkIsActive };
   },
   mounted() {
-    console.log('Bookmark sessions is mounted');
+    //console.log('Bookmark sessions is mounted');
   },
 };
 </script>
