@@ -117,8 +117,8 @@ export default {
   <div class="elz d-block pAT16 lh-12">
     <div class="elz d-block fn-16 pB8">ФГБУ РЭА Минэнерго России</div>
     <div class="elz d-flex f-wrap mL-16 pB16">
-      <div class="elz d-block mL16 mT8">ID: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov">50935</a></div>
-      <div class="elz d-block mL16 mT8">Code: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov">1750935</a></div>
+      <div class="elz d-block mL16 mT8">ID: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">50935</a></div>
+      <div class="elz d-block mL16 mT8">Code: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">1750935</a></div>
       <div class="elz d-block mL16 mT8">
         Телефон: <b class="bold nowrap">+7 925 772 69 19</b>
       </div>

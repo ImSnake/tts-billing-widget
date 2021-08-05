@@ -22,16 +22,16 @@ export default {
     <div class="elz d-table w100p pH16 pB16">
 
       <table v-for="contractItem in servicesData" class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1
-       uStripInner stripLD borNoneInner bg bg-primary bgL5 stripSelInnerCol4">
-        <thead class="elz pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
-        <tr>
-          <td class="w1 h56">
+       uStrip stripLD borNoneIn bg bg-primary bgL5 stripSelCol4">
+        <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
+        <tr class="tr">
+          <td class="td w1 h56">
             <div class="elz d-flex a-X s16 bor2 br br-green rCircle">
               <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Активный"
                    style="--elzMsk: url('https://lelouch.ru/uploads/icons/play.svg');"></div>
             </div>
           </td>
-          <td class="wmn200">
+          <td class="td wmn200">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
                 <div class="elz d-block bold mL8 mT4">{{ contractItem.CONTRACT }}</div>
@@ -42,7 +42,7 @@ export default {
               </div>
             </div>
           </td>
-          <td class="w240 wmn240">
+          <td class="td w240 wmn240">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
                 <div class="elz d-block mL8 mT4 nowrap">Баланс: <b class="bold">{{ contractItem.BALANCE }}</b></div>
@@ -52,37 +52,37 @@ export default {
               </div>
             </div>
           </td>
-          <td class="w240 wmn240 al-right">
+          <td class="td w240 wmn240 al-right">
             <div class="elz">Абон. плата: <b class="bold">{{ contractItem.totalCost }}</b></div>
           </td>
-          <td class="w64 wmn64">
+          <td class="td w64 wmn64">
             <div class="elz d-block">Рубль</div>
           </td>
-          <td class="w120 wmn120">
+          <td class="td w120 wmn120">
             <div class="elz d-block bold">Период С</div>
           </td>
-          <td class="w120 wmn120">
+          <td class="td w120 wmn120">
             <div class="elz d-block bold">Период По</div>
           </td>
-          <td class="w150 wmn150">
+          <td class="td w150 wmn150">
             <div class="elz d-block bold">Доп. соглашение</div>
           </td>
         </tr>
         </thead>
-        <tbody class="elz pad p8 stripOdd stripHover">
-        <tr v-for="servicesItem in contractItem.services">
-          <td>
+        <tbody class="elz tbody pad p8 stripOdd stripHover">
+        <tr v-for="servicesItem in contractItem.services" class="tr">
+          <td class="td">
             <div class="elz d-flex a-X s16 bor2 br br-green rCircle">
               <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Активный" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross.svg');"></div>
             </div>
           </td>
-          <td>{{ servicesItem.SERVICE }}</td>
-          <td>{{ servicesItem.SERVICE_LOCK }}</td>
-          <td class="bold al-right nowrap">{{ servicesItem.PRICE }}</td>
-          <td>Рубль</td>
-          <td>{{ servicesItem.D_BEGIN }}</td>
-          <td>{{ servicesItem.D_END }}</td>
-          <td>???</td>
+          <td class="td">{{ servicesItem.SERVICE }}</td>
+          <td class="td">{{ servicesItem.SERVICE_LOCK }}</td>
+          <td class="td bold al-right nowrap">{{ servicesItem.PRICE }}</td>
+          <td class="td">Рубль</td>
+          <td class="td">{{ servicesItem.D_BEGIN }}</td>
+          <td class="td">{{ servicesItem.D_END }}</td>
+          <td class="td">???</td>
         </tr>
         </tbody>
       </table>

@@ -383,9 +383,6 @@ html.light:root {
 .evNone, .evNoneBef:before, .evNoneAft:after, .evNoneImp { pointer-events: none; }
 .evAuto, .evAutoBef:before, .evAutoAft:after, .evAutoImp { pointer-events: auto; }
 
-.evNoneImp * { pointer-events: none !important; }
-.evAutoImp * { pointer-events: auto !important; }
-
 
 
 
@@ -518,8 +515,14 @@ C  D
 
 /* Sizes */
 
-.sNoEP, .wNoEP { width:  calc(100% - var(--elzEPSize)); }
-.sNoEP, .hNoEP { height: calc(100% - var(--elzEPSize)); }
+.s100pEP, .w100pEP { width:  calc(100% - var(--elzEPSize)); } .s100pEP2, .w100pEP2 { width:  calc(100% - (var(--elzEPSize) * 2)); }
+.s100pEP, .h100pEP { height: calc(100% - var(--elzEPSize)); } .s100pEP2, .h100pEP2 { height: calc(100% - (var(--elzEPSize) * 2)); }
+
+.s100wEP, .w100wEP { width:  calc(100vw - var(--elzEPSize)); } .s100wEP2, .w100wEP2 { width:  calc(100vw - (var(--elzEPSize) * 2)); }
+.s100wEP, .h100wEP { height: calc(100vw - var(--elzEPSize)); } .s100wEP2, .h100wEP2 { height: calc(100vw - (var(--elzEPSize) * 2)); }
+
+.s100hEP, .w100hEP { width:  calc(100vh - var(--elzEPSize)); } .s100hEP2, .w100hEP2 { width:  calc(100vh - (var(--elzEPSize) * 2)); }
+.s100hEP, .h100hEP { height: calc(100vh - var(--elzEPSize)); } .s100hEP2, .h100hEP2 { height: calc(100vh - (var(--elzEPSize) * 2)); }
 
 .sAuto, .wAuto, .sBefAuto:before, .wBefAuto:before, .sAftAuto:after, .wAftAuto:after { width:  auto; }
 .sAuto, .hAuto, .sBefAuto:before, .hBefAuto:before, .sAftAuto:after, .hAftAuto:after { height: auto; }
@@ -965,41 +968,41 @@ C  D
 
 .rInh, .rInhBef:before, .rInhAft:after { border-radius: inherit; }
 
-.r0, .rT0, .rL0, .rEA0, .rAEA0, .rAEB0, .rAED0, .rD0, .rIn0 > *:first-child > *:first-child, .rInner0 > *:first-child > *:first-child > *:first-child { border-top-left-radius:   0; }
-.r1, .rT1, .rL1, .rEA1, .rAEA1, .rAEB1, .rAED1, .rD1, .rIn1 > *:first-child > *:first-child, .rInner1 > *:first-child > *:first-child > *:first-child { border-top-left-radius: 1px; }
-.r2, .rT2, .rL2, .rEA2, .rAEA2, .rAEB2, .rAED2, .rD2, .rIn2 > *:first-child > *:first-child, .rInner2 > *:first-child > *:first-child > *:first-child { border-top-left-radius: 2px; }
-.r3, .rT3, .rL3, .rEA3, .rAEA3, .rAEB3, .rAED3, .rD3, .rIn3 > *:first-child > *:first-child, .rInner3 > *:first-child > *:first-child > *:first-child { border-top-left-radius: 3px; }
-.r4, .rT4, .rL4, .rEA4, .rAEA4, .rAEB4, .rAED4, .rD4, .rIn4 > *:first-child > *:first-child, .rInner4 > *:first-child > *:first-child > *:first-child { border-top-left-radius: 4px; }
-.r5, .rT5, .rL5, .rEA5, .rAEA5, .rAEB5, .rAED5, .rD5, .rIn5 > *:first-child > *:first-child, .rInner5 > *:first-child > *:first-child > *:first-child { border-top-left-radius: 5px; }
-.r6, .rT6, .rL6, .rEA6, .rAEA6, .rAEB6, .rAED6, .rD6, .rIn6 > *:first-child > *:first-child, .rInner6 > *:first-child > *:first-child > *:first-child { border-top-left-radius: 6px; }
-.r8, .rT8, .rL8, .rEA8, .rAEA8, .rAEB8, .rAED8, .rD8, .rIn8 > *:first-child > *:first-child, .rInner8 > *:first-child > *:first-child > *:first-child { border-top-left-radius: 8px; }
+.r0, .rT0, .rL0, .rEA0, .rAEA0, .rAEB0, .rAED0, .rD0 { border-top-left-radius:   0; }
+.r1, .rT1, .rL1, .rEA1, .rAEA1, .rAEB1, .rAED1, .rD1 { border-top-left-radius: 1px; }
+.r2, .rT2, .rL2, .rEA2, .rAEA2, .rAEB2, .rAED2, .rD2 { border-top-left-radius: 2px; }
+.r3, .rT3, .rL3, .rEA3, .rAEA3, .rAEB3, .rAED3, .rD3 { border-top-left-radius: 3px; }
+.r4, .rT4, .rL4, .rEA4, .rAEA4, .rAEB4, .rAED4, .rD4 { border-top-left-radius: 4px; }
+.r5, .rT5, .rL5, .rEA5, .rAEA5, .rAEB5, .rAED5, .rD5 { border-top-left-radius: 5px; }
+.r6, .rT6, .rL6, .rEA6, .rAEA6, .rAEB6, .rAED6, .rD6 { border-top-left-radius: 6px; }
+.r8, .rT8, .rL8, .rEA8, .rAEA8, .rAEB8, .rAED8, .rD8 { border-top-left-radius: 8px; }
 
-.r0, .rT0, .rR0, .rEB0, .rAEB0, .rAEA0, .rAEC0, .rI0, .rIn0 > *:first-child > *:last-child, .rInner0 > *:first-child > *:first-child > *:last-child { border-top-right-radius:   0; }
-.r1, .rT1, .rR1, .rEB1, .rAEB1, .rAEA1, .rAEC1, .rI1, .rIn1 > *:first-child > *:last-child, .rInner1 > *:first-child > *:first-child > *:last-child { border-top-right-radius: 1px; }
-.r2, .rT2, .rR2, .rEB2, .rAEB2, .rAEA2, .rAEC2, .rI2, .rIn2 > *:first-child > *:last-child, .rInner2 > *:first-child > *:first-child > *:last-child { border-top-right-radius: 2px; }
-.r3, .rT3, .rR3, .rEB3, .rAEB3, .rAEA3, .rAEC3, .rI3, .rIn3 > *:first-child > *:last-child, .rInner3 > *:first-child > *:first-child > *:last-child { border-top-right-radius: 3px; }
-.r4, .rT4, .rR4, .rEB4, .rAEB4, .rAEA4, .rAEC4, .rI4, .rIn4 > *:first-child > *:last-child, .rInner4 > *:first-child > *:first-child > *:last-child { border-top-right-radius: 4px; }
-.r5, .rT5, .rR5, .rEB5, .rAEB5, .rAEA5, .rAEC5, .rI5, .rIn5 > *:first-child > *:last-child, .rInner5 > *:first-child > *:first-child > *:last-child { border-top-right-radius: 5px; }
-.r6, .rT6, .rR6, .rEB6, .rAEB6, .rAEA6, .rAEC6, .rI6, .rIn6 > *:first-child > *:last-child, .rInner6 > *:first-child > *:first-child > *:last-child { border-top-right-radius: 6px; }
-.r8, .rT8, .rR8, .rEB8, .rAEB8, .rAEA8, .rAEC8, .rI8, .rIn8 > *:first-child > *:last-child, .rInner8 > *:first-child > *:first-child > *:last-child { border-top-right-radius: 8px; }
+.r0, .rT0, .rR0, .rEB0, .rAEB0, .rAEA0, .rAEC0, .rI0 { border-top-right-radius:   0; }
+.r1, .rT1, .rR1, .rEB1, .rAEB1, .rAEA1, .rAEC1, .rI1 { border-top-right-radius: 1px; }
+.r2, .rT2, .rR2, .rEB2, .rAEB2, .rAEA2, .rAEC2, .rI2 { border-top-right-radius: 2px; }
+.r3, .rT3, .rR3, .rEB3, .rAEB3, .rAEA3, .rAEC3, .rI3 { border-top-right-radius: 3px; }
+.r4, .rT4, .rR4, .rEB4, .rAEB4, .rAEA4, .rAEC4, .rI4 { border-top-right-radius: 4px; }
+.r5, .rT5, .rR5, .rEB5, .rAEB5, .rAEA5, .rAEC5, .rI5 { border-top-right-radius: 5px; }
+.r6, .rT6, .rR6, .rEB6, .rAEB6, .rAEA6, .rAEC6, .rI6 { border-top-right-radius: 6px; }
+.r8, .rT8, .rR8, .rEB8, .rAEB8, .rAEA8, .rAEC8, .rI8 { border-top-right-radius: 8px; }
 
-.r0, .rB0, .rL0, .rED0, .rAED0, .rAEA0, .rAEC0, .rI0, .rIn0 > *:last-child > *:first-child, .rInner0 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:    0; }
-.r1, .rB1, .rL1, .rED1, .rAED1, .rAEA1, .rAEC1, .rI1, .rIn1 > *:last-child > *:first-child, .rInner1 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:  1px; }
-.r2, .rB2, .rL2, .rED2, .rAED2, .rAEA2, .rAEC2, .rI2, .rIn2 > *:last-child > *:first-child, .rInner2 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:  2px; }
-.r3, .rB3, .rL3, .rED3, .rAED3, .rAEA3, .rAEC3, .rI3, .rIn3 > *:last-child > *:first-child, .rInner3 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:  3px; }
-.r4, .rB4, .rL4, .rED4, .rAED4, .rAEA4, .rAEC4, .rI4, .rIn4 > *:last-child > *:first-child, .rInner4 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:  4px; }
-.r5, .rB5, .rL5, .rED5, .rAED5, .rAEA5, .rAEC5, .rI5, .rIn5 > *:last-child > *:first-child, .rInner5 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:  5px; }
-.r6, .rB6, .rL6, .rED6, .rAED6, .rAEA6, .rAEC6, .rI6, .rIn6 > *:last-child > *:first-child, .rInner6 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:  6px; }
-.r8, .rB8, .rL8, .rED8, .rAED8, .rAEA8, .rAEC8, .rI8, .rIn8 > *:last-child > *:first-child, .rInner8 > *:last-child > *:last-child > *:first-child { border-bottom-left-radius:  8px; }
+.r0, .rB0, .rL0, .rED0, .rAED0, .rAEA0, .rAEC0, .rI0 { border-bottom-left-radius:    0; }
+.r1, .rB1, .rL1, .rED1, .rAED1, .rAEA1, .rAEC1, .rI1 { border-bottom-left-radius:  1px; }
+.r2, .rB2, .rL2, .rED2, .rAED2, .rAEA2, .rAEC2, .rI2 { border-bottom-left-radius:  2px; }
+.r3, .rB3, .rL3, .rED3, .rAED3, .rAEA3, .rAEC3, .rI3 { border-bottom-left-radius:  3px; }
+.r4, .rB4, .rL4, .rED4, .rAED4, .rAEA4, .rAEC4, .rI4 { border-bottom-left-radius:  4px; }
+.r5, .rB5, .rL5, .rED5, .rAED5, .rAEA5, .rAEC5, .rI5 { border-bottom-left-radius:  5px; }
+.r6, .rB6, .rL6, .rED6, .rAED6, .rAEA6, .rAEC6, .rI6 { border-bottom-left-radius:  6px; }
+.r8, .rB8, .rL8, .rED8, .rAED8, .rAEA8, .rAEC8, .rI8 { border-bottom-left-radius:  8px; }
 
-.r0, .rB0, .rR0, .rEC0, .rAEC0, .rAEB0, .rAED0, .rD0, .rIn0 > *:last-child > *:last-child, .rInner0 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius:   0; }
-.r1, .rB1, .rR1, .rEC1, .rAEC1, .rAEB1, .rAED1, .rD1, .rIn1 > *:last-child > *:last-child, .rInner1 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius: 1px; }
-.r2, .rB2, .rR2, .rEC2, .rAEC2, .rAEB2, .rAED2, .rD2, .rIn2 > *:last-child > *:last-child, .rInner2 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius: 2px; }
-.r3, .rB3, .rR3, .rEC3, .rAEC3, .rAEB3, .rAED3, .rD3, .rIn3 > *:last-child > *:last-child, .rInner3 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius: 3px; }
-.r4, .rB4, .rR4, .rEC4, .rAEC4, .rAEB4, .rAED4, .rD4, .rIn4 > *:last-child > *:last-child, .rInner4 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius: 4px; }
-.r5, .rB5, .rR5, .rEC5, .rAEC5, .rAEB5, .rAED5, .rD5, .rIn5 > *:last-child > *:last-child, .rInner5 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius: 5px; }
-.r6, .rB6, .rR6, .rEC6, .rAEC6, .rAEB6, .rAED6, .rD6, .rIn6 > *:last-child > *:last-child, .rInner6 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius: 6px; }
-.r8, .rB8, .rR8, .rEC8, .rAEC8, .rAEB8, .rAED8, .rD8, .rIn8 > *:last-child > *:last-child, .rInner8 > *:last-child > *:last-child > *:last-child { border-bottom-right-radius: 8px; }
+.r0, .rB0, .rR0, .rEC0, .rAEC0, .rAEB0, .rAED0, .rD0 { border-bottom-right-radius:   0; }
+.r1, .rB1, .rR1, .rEC1, .rAEC1, .rAEB1, .rAED1, .rD1 { border-bottom-right-radius: 1px; }
+.r2, .rB2, .rR2, .rEC2, .rAEC2, .rAEB2, .rAED2, .rD2 { border-bottom-right-radius: 2px; }
+.r3, .rB3, .rR3, .rEC3, .rAEC3, .rAEB3, .rAED3, .rD3 { border-bottom-right-radius: 3px; }
+.r4, .rB4, .rR4, .rEC4, .rAEC4, .rAEB4, .rAED4, .rD4 { border-bottom-right-radius: 4px; }
+.r5, .rB5, .rR5, .rEC5, .rAEC5, .rAEB5, .rAED5, .rD5 { border-bottom-right-radius: 5px; }
+.r6, .rB6, .rR6, .rEC6, .rAEC6, .rAEB6, .rAED6, .rD6 { border-bottom-right-radius: 6px; }
+.r8, .rB8, .rR8, .rEC8, .rAEC8, .rAEB8, .rAED8, .rD8 { border-bottom-right-radius: 8px; }
 
 .rRound, .rTRound, .rLRound, .rEARound, .rAEARound, .rAEBRound, .rAEDRound, .rDRound { border-top-left-radius:     2560px; }
 .rRound, .rTRound, .rRRound, .rEBRound, .rAEBRound, .rAEARound, .rAECRound, .rIRound { border-top-right-radius:    2560px; }
@@ -1045,18 +1048,9 @@ C  D
 .br-double, .brB-double .brEC-double, .brED-double, .brAR-double, .brAB-double, .brAL-double, .brV-double { border-bottom-style: double; }
 .br-double, .brL-double .brED-double, .brEA-double, .brAB-double, .brAL-double, .brAT-double, .brH-double { border-left-style:   double; }
 
-.borNoneIn > *:last-child,
-.borNoneIn > *:last-child > *,
-.borNoneInner > *:last-child > *:last-child,
-.borNoneInner > *:last-child > *:last-child > *,
-.borNone, .borARNone, .borABNone, .borALNone, .borVNone, .borEDNone, .borECNone, .borBNone, .borVNone { border-bottom-width: 0 !important; }
-
-.borNoneIn > * > *:first-child,
-.borNoneInner > * > * > *:first-child,
+.borNone, .borATNone, .borARNone, .borALNone, .borVNone, .borEANone, .borEBNone, .borTNone, .borVNone { border-top-width:    0 !important; }
 .borNone, .borATNone, .borABNone, .borALNone, .borHNone, .borEANone, .borEDNone, .borLNone, .borHNone { border-left-width:   0 !important; }
-
-.borNoneIn > * > *:last-child,
-.borNoneInner > * > * > *:last-child,
+.borNone, .borARNone, .borABNone, .borALNone, .borVNone, .borEDNone, .borECNone, .borBNone, .borVNone { border-bottom-width: 0 !important; }
 .borNone, .borATNone, .borARNone, .borABNone, .borHNone, .borEBNone, .borECNone, .borRNone, .borHNone { border-right-width:  0 !important; }
 
 .bor0, .borBef0:before, .borAft0:after, .borAT0, .borAR0, .borAL0, .borV0, .borEA0, .borEB0, .borT0 { border-top-width:   0; } .bor0, .borBef0:before, .borAft0:after, .borAR0, .borAB0, .borAL0, .borV0, .borED0, .borEC0, .borB0 { border-bottom-width:   0; } .bor0, .borBef0:before, .borAft0:after, .borAT0, .borAB0, .borAL0, .borH0, .borEA0, .borED0, .borL0 { border-left-width:   0; } .bor0, .borBef0:before, .borAft0:after, .borAT0, .borAR0, .borAB0, .borH0, .borEB0, .borEC0, .borR0 { border-right-width:   0; }

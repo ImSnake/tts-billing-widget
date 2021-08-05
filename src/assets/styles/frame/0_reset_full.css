@@ -1,6 +1,17 @@
-*,
-*:before,
-*:after,
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+input, button, textarea, select,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video,
 .elz,
 .elz:before,
 .elz:after {
@@ -15,7 +26,6 @@
 
     font:            inherit;
     color:           inherit;
-
     vertical-align: baseline;
 
     -webkit-appearance: none;
@@ -43,19 +53,19 @@
     text-decoration: none;
 }
 
-*:before, .elz:before,
-*:after,  .elz:after { content: none; }
+q:before, .elz:before,
+q:after,  .elz:after { content: none; }
 
 /* Focus inner */
-*::-moz-focus-inner, .elz::-moz-focus-inner { border: 0; padding: 0; }
+input::-moz-focus-inner, button::-moz-focus-inner, .elz::-moz-focus-inner { border: 0; padding: 0; }
 
 /* Clear */
-*::-ms-clear,  .elz::-ms-clear,
-*::-ms-reveal, .elz::-ms-reveal,
-*::-ms-expand, .elz::-ms-expand { display: none; }
+input::-ms-clear,  textarea::-ms-clear,  select::-ms-clear,  .elz::-ms-clear,
+input::-ms-reveal, textarea::-ms-reveal, select::-ms-reveal, .elz::-ms-reveal,
+input::-ms-expand, textarea::-ms-expand, select::-ms-expand, .elz::-ms-expand { display: none; }
 
 /* Placeholder */
-*::placeholder, .elz::placeholder { opacity: 0.6; color: inherit; }
+input::placeholder, textarea::placeholder, select::placeholder, .elz::placeholder { opacity: 0.6; color: inherit; }
 
 /* Input type number */
 input[type="number"], .elz[type="number"] { -moz-appearance: textfield; }

@@ -206,6 +206,7 @@
     height: 32px;
     margin: 0 4px;
     background-color: hsla(var(--c-primary-H, 0), var(--c-primary-S, 0%), var(--c-primary-L), 1);
+    border: none;
 }
 
 .picker__footer > button,
