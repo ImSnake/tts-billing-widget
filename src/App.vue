@@ -162,7 +162,6 @@ export default {
   <Account ref="account" :accountData="billingData.accountData"></Account>
 
   <Sessions ref="sessions" :sessionsData="billingData.sessionsData"></Sessions>
-
 </template>
 
 <style src="./assets/styles/_style.css"></style>
