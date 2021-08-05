@@ -14,7 +14,6 @@ export default {
 
   data() {
     return {
-      hydraData: [],
       billingData: {
         servicesData: { services: "services" },
         accountData: { account: "account" },
@@ -24,7 +23,6 @@ export default {
   },
 
   created() {
-    console.log("App root component is created");
     this.getWidgetHydraData();
   },
 
@@ -46,33 +44,75 @@ export default {
     },
 
     getWidgetHydraData() {
-      //const ttsId = '97118' '98339';
+      //const ttsId = '97118', '98339', ;
 
       const ttsId = new URL(location.href).searchParams.get("CustomerID");
+
+      console.log(`user TTS ID = ${ttsId}`);
 
       if (ttsId) {
         const hydraResponse = sendUser(ttsId);
 
-        hydraResponse.then((res) => {
-          //this.hydraData = res;
+        hydraResponse.then((result) => {
+          console.log(result);
 
-          let sortedData = {};
-          let contractsCount = 0;
-          res.forEach(item => {
-            console.log(item);
-            console.log(sortedData.find(item.CONTRACT));
-
-            if (!sortedData.find(item.CONTRACT)) {
-              sortedData.push(item);
-              contractsCount++;
-            }
-          });
-          this.hydraData = sortedData;
-          console.log(contractsCount);
-          console.log(this.hydraData);
+          this.getServicesData(result);
         });
       }
     },
+
+    getServicesData(res) {
+
+      let sortedData = [];
+
+      res.forEach((item) => {
+
+        const contractItem = {
+          ACCOUNT: item.ACCOUNT,
+          CONTRACT: item.CONTRACT,
+          BALANCE: item.BALANCE,
+          services: [],
+          totalCost: 0,
+        };
+
+        const serviceItem = {
+          SERVICE: item.SERVICE,
+          SERVICE_LOCK: item.SERVICE_LOCK,
+          PRICE: item.PRICE,
+          D_BEGIN: new Date(item.D_BEGIN).toISOString().split('T')[0],
+          D_END: (item.D_END) ? new Date(item.D_END).toISOString().split('T')[0] : '-',
+        };
+
+        if (sortedData.length < 1 || !sortedData.find(el => el.CONTRACT === item.CONTRACT)) {
+          contractItem.services.push(serviceItem);
+          sortedData.push(contractItem);
+        } else {
+          for (let i = 0; i < sortedData.length; i++) {
+            if (sortedData[i].CONTRACT === item.CONTRACT) {
+              sortedData[i].services.push(serviceItem);
+            }
+          }
+        }
+      });
+
+      sortedData.forEach(contract => {
+        let summary = 0;
+        contract.services.forEach(service => {
+          summary += service.PRICE;
+        });
+        contract.totalCost = summary;
+      });
+        /* var sum = array.reduce(function(a, b){
+          return a + b;
+        }, 0);
+
+        console.log(sum);*/
+
+      this.billingData.servicesData = sortedData;
+
+      console.log(this.billingData.servicesData);
+    },
+
   },
 };
 </script>
@@ -94,116 +134,28 @@ export default {
 
   <div class="elz h48 borB1 br br-primary brL-20 brLInvD brLF-10 brFD">
     <div class="elz d-flex h100p">
-      <div
-        @click="switchBookmark($event.currentTarget, 'services')"
-        class="
-          billingBookmarkTitle
-          elz
-          d-flex
-          pH16
-          opAct07
-          sHovOut
-          sSelOut
-          opSelOut
-          fn fn-primary-t
-          fnHovL-10
-          fnSelL-10
-          fnHovLInvD
-          fnSelLInvD
-          sel
-        "
-      >
+      <div @click="switchBookmark($event.currentTarget, 'services')"
+        class="billingBookmarkTitle elz d-flex pH16 opAct07 sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
+         fnHovLInvD fnSelLInvD sel">
         <div class="elz p-rel d-flex a-X">
           <div class="elz d-block nowrap">Договоры и услуги</div>
-          <div
-            class="
-              elz
-              p-abs p-B
-              borB3
-              mB-1
-              br-CC
-              wZero
-              wSelInFull
-              wHovInFull
-              trns
-              op05
-              opSelIn10
-            "
-          ></div>
+          <div class="elz p-abs p-B borB3 mB-1 br-CC wZero wSelInFull wHovInFull trns op05 opSelIn10"></div>
         </div>
       </div>
-      <div
-        @click="switchBookmark($event.currentTarget, 'account')"
-        class="
-          billingBookmarkTitle
-          elz
-          d-flex
-          pH16
-          opAct07
-          sHovOut
-          sSelOut
-          opSelOut
-          fn fn-primary-t
-          fnHovL-10
-          fnSelL-10
-          fnHovLInvD
-          fnSelLInvD
-        "
-      >
+      <div @click="switchBookmark($event.currentTarget, 'account')"
+        class="billingBookmarkTitle elz d-flex pH16 opAct07 sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
+         fnHovLInvD fnSelLInvD">
         <div class="elz p-rel d-flex a-X">
           <div class="elz d-block nowrap">Лицевой счет</div>
-          <div
-            class="
-              elz
-              p-abs p-B
-              borB3
-              mB-1
-              br-CC
-              wZero
-              wSelInFull
-              wHovInFull
-              trns
-              op05
-              opSelIn10
-            "
-          ></div>
+          <div class="elz p-abs p-B borB3 mB-1 br-CC wZero wSelInFull wHovInFull trns op05 opSelIn10"></div>
         </div>
       </div>
-      <div
-        @click="switchBookmark($event.currentTarget, 'sessions')"
-        class="
-          billingBookmarkTitle
-          elz
-          d-flex
-          pH16
-          opAct07
-          sHovOut
-          sSelOut
-          opSelOut
-          fn fn-primary-t
-          fnHovL-10
-          fnSelL-10
-          fnHovLInvD
-          fnSelLInvD
-        "
-      >
+      <div @click="switchBookmark($event.currentTarget, 'sessions')"
+        class="billingBookmarkTitle elz d-flex pH16 opAct07 sHovOut sSelOut opSelOut fn fn-primary-t fnHovL-10 fnSelL-10
+         fnHovLInvD fnSelLInvD">
         <div class="elz p-rel d-flex a-X">
           <div class="elz d-block nowrap">VPN Сессии</div>
-          <div
-            class="
-              elz
-              p-abs p-B
-              borB3
-              mB-1
-              br-CC
-              wZero
-              wSelInFull
-              wHovInFull
-              trns
-              op05
-              opSelIn10
-            "
-          ></div>
+          <div class="elz p-abs p-B borB3 mB-1 br-CC wZero wSelInFull wHovInFull trns op05 opSelIn10"></div>
         </div>
       </div>
     </div>
@@ -214,6 +166,7 @@ export default {
   <Account ref="account" :accountData="billingData.accountData"></Account>
 
   <Sessions ref="sessions" :sessionsData="billingData.sessionsData"></Sessions>
+
 </template>
 
 <style src="./assets/styles/_style.css"></style>
