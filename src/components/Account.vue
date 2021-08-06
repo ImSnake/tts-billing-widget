@@ -29,10 +29,10 @@ export default {
 
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/search.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/search.svg');"></i>
                  </div>
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 showSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('/dev/nportal/uploads/icons/cross1.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross1.svg');"></i>
                  </div>
                </div>
 
@@ -58,7 +58,7 @@ export default {
 
                <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
-                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/arrow1.svg');"></i>
+                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
                </div>
 
@@ -71,10 +71,10 @@ export default {
 
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/cash.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cash.svg');"></i>
                  </div>
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 showSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('/dev/nportal/uploads/icons/cross1.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross1.svg');"></i>
                  </div>
                </div>
 
@@ -96,7 +96,7 @@ export default {
 
                <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
-                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/arrow1.svg');"></i>
+                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
                </div>
 
@@ -110,10 +110,10 @@ export default {
 
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/calendar.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/calendar.svg');"></i>
                  </div>
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 showSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('/dev/nportal/uploads/icons/cross1.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross1.svg');"></i>
                  </div>
                </div>
 
@@ -139,7 +139,7 @@ export default {
 
                <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10 sel">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
-                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/arrow1.svg');"></i>
+                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
                </div>
 
@@ -150,10 +150,10 @@ export default {
 
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/calendar.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/calendar.svg');"></i>
                  </div>
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 showSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('/dev/nportal/uploads/icons/cross1.svg');"></i>
+                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross1.svg');"></i>
                  </div>
                </div>
 
@@ -288,7 +288,7 @@ export default {
 
                <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
-                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('/dev/nportal/uploads/icons/arrow1.svg');"></i>
+                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
                </div>
 
