@@ -6,12 +6,11 @@ export default {
   props: {
     servicesData: { type: Object, required: true },
   },
+
   setup() {
     const bookmarkIsActive = ref(true);
     return { bookmarkIsActive };
   },
-
-  mounted() {},
 
 };
 </script>

@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       billingData: {
-        servicesData: { },
+        servicesData: {},
         accountData: { account: "account" },
         sessionsData: { sessions: "sessions" },
       },
@@ -26,10 +26,7 @@ export default {
     this.getWidgetHydraData();
   },
 
-  mounted() {},
-
   methods: {
-
     switchBookmark(elem, refName) {
       document.querySelectorAll(".billingBookmarkTitle").forEach((el) => {
         el.classList.remove("sel");
@@ -38,15 +35,11 @@ export default {
       elem.classList.add("sel");
 
       Object.keys(this.$refs).forEach((el) => {
-        el === refName
-          ? (this.$refs[el].bookmarkIsActive = true)
-          : (this.$refs[el].bookmarkIsActive = false);
+        (el === refName) ? (this.$refs[el].bookmarkIsActive = true) : (this.$refs[el].bookmarkIsActive = false);
       });
     },
 
     getWidgetHydraData() {
-      //const ttsId = '97118', '98339', ;
-
       const ttsId = new URL(location.href).searchParams.get("CustomerID");
 
       console.log(`user TTS ID = ${ttsId}`);
@@ -63,7 +56,6 @@ export default {
     },
 
     getServicesData(res) {
-
       let sortedData = [];
 
       res.forEach((item) => {
@@ -88,9 +80,9 @@ export default {
           contractItem.services.push(serviceItem);
           sortedData.push(contractItem);
         } else {
-          for (let i = 0; i < sortedData.length; i++) {
-            if (sortedData[i].CONTRACT === item.CONTRACT) {
-              sortedData[i].services.push(serviceItem);
+          for (let value of sortedData) {
+            if (value.CONTRACT === item.CONTRACT) {
+              value.services.push(serviceItem);
             }
           }
         }
@@ -108,22 +100,20 @@ export default {
 
       console.log(this.billingData.servicesData);
     },
-
   },
 };
 </script>
 
 <template>
+
   <div class="elz d-block pAT16 lh-12">
     <div class="elz d-block fn-16 pB8">ФГБУ РЭА Минэнерго России</div>
     <div class="elz d-flex f-wrap mL-16 pB16">
       <div class="elz d-block mL16 mT8">ID: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">50935</a></div>
       <div class="elz d-block mL16 mT8">Code: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">1750935</a></div>
-      <div class="elz d-block mL16 mT8">
-        Телефон: <b class="bold nowrap">+7 925 772 69 19</b>
+      <div class="elz d-block mL16 mT8">Телефон: <b class="bold nowrap">+7 925 772 69 19</b>
       </div>
-      <div class="elz d-block mL16 mT8">
-        Адрес: <b class="bold">г Москва ул Щепкина д. 40 Строение 1</b>
+      <div class="elz d-block mL16 mT8">Адрес: <b class="bold">г Москва ул Щепкина д. 40 Строение 1</b>
       </div>
     </div>
   </div>
@@ -162,6 +152,7 @@ export default {
   <Account ref="account" :accountData="billingData.accountData"></Account>
 
   <Sessions ref="sessions" :sessionsData="billingData.sessionsData"></Sessions>
+
 </template>
 
 <style src="./assets/styles/_style.css"></style>
