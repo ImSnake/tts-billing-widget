@@ -1,5 +1,5 @@
 <script>
-import { sendUser } from "./api";
+import { requestCustomerData } from "@/requests/api";
 import Account from "@/components/Account";
 import Services from "@/components/Services";
 import Sessions from "@/components/Sessions";
@@ -14,19 +14,20 @@ export default {
 
   data() {
     return {
-      billingData: {
-        servicesData: {},
-        accountData: { account: "account" },
-        sessionsData: { sessions: "sessions" },
-      },
+      ttsId: new URL(location.href).searchParams.get("CustomerID"),
+      customerData: {},
     };
   },
 
   created() {
-    this.getWidgetHydraData();
+    this.getCustomerData();
   },
 
-  mounted() {},
+  mounted() {
+    //97118
+    //98339
+    //99206
+  },
 
   methods: {
 
@@ -44,67 +45,14 @@ export default {
       });
     },
 
-    getWidgetHydraData() {
-      const ttsId = new URL(location.href).searchParams.get("CustomerID");
-
-      console.log(`user TTS ID = ${ttsId}`);
-
-      if (ttsId) {
-        const hydraResponse = sendUser(ttsId);
-
+    getCustomerData() {
+      if (this.ttsId) {
+        const hydraResponse = requestCustomerData(this.ttsId);
         hydraResponse.then((result) => {
-          console.log(result);
-
-          this.getServicesData(result);
+          this.customerData = result;
         });
       }
-    },
-
-    getServicesData(res) {
-      let sortedData = [];
-
-      res.forEach((item) => {
-
-        const contractItem = {
-          ACCOUNT: item.ACCOUNT,
-          CONTRACT: item.CONTRACT,
-          BALANCE: item.BALANCE,
-          services: [],
-          totalCost: 0,
-        };
-
-        const serviceItem = {
-          SERVICE: item.SERVICE,
-          SERVICE_LOCK: item.SERVICE_LOCK,
-          PRICE: item.PRICE,
-          D_BEGIN: new Date(item.D_BEGIN).toISOString().split('T')[0],
-          D_END: (item.D_END) ? new Date(item.D_END).toISOString().split('T')[0] : '-',
-        };
-
-        if (sortedData.length < 1 || !sortedData.find(el => el.CONTRACT === item.CONTRACT)) {
-          contractItem.services.push(serviceItem);
-          sortedData.push(contractItem);
-        } else {
-          for (let value of sortedData) {
-            if (value.CONTRACT === item.CONTRACT) {
-              value.services.push(serviceItem);
-            }
-          }
-        }
-      });
-
-      sortedData.forEach(contract => {
-        let summary = 0;
-        contract.services.forEach(service => {
-          summary += service.PRICE;
-        });
-        contract.totalCost = summary;
-      });
-
-      this.billingData.servicesData = sortedData;
-
-      console.log(this.billingData.servicesData);
-    },
+    }
 
   },
 };
@@ -112,16 +60,18 @@ export default {
 
 <template>
   <div class="elz d-block pAT16 lh-12">
-    <div class="elz d-block fn-16 pB8">ФГБУ РЭА Минэнерго России</div>
+    <div class="elz d-block fn-16 pB8">{{ customerData.CustomerName }}</div>
     <div class="elz d-flex f-wrap mL-16 pB16">
-      <div class="elz d-block mL16 mT8">SDN: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">50935</a></div>
-      <div class="elz d-block mL16 mT8">HYDRA: <a href="#" class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">1750935</a></div>
-      <div class="elz d-block mL16 mT8">
-        Телефон: <b class="bold nowrap">+7 925 772 69 19</b>
+      <div class="elz d-block mL16 mT8">SDN:
+        <a :href="'http://sdn.naukanet.ru/customers/customer/'+customerData.CustomerID" target="_blank"
+           class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.CustomerID }}</a>
       </div>
-      <div class="elz d-block mL16 mT8">
-        Адрес: <b class="bold">г Москва ул Щепкина д. 40 Строение 1</b>
+      <div class="elz d-block mL16 mT8">HYDRA:
+        <a href="#" target="_blank"
+           class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.UBN }}</a>
       </div>
+      <div class="elz d-block mL16 mT8">Телефон: <b class="bold nowrap">{{ customerData.CustomerPhone ? customerData.CustomerPhone : '&nbsp;-' }}</b></div>
+      <div class="elz d-block mL16 mT8">Адрес: <b class="bold">{{ customerData.LegalAdress ? customerData.LegalAdress : '&nbsp;-' }}</b></div>
     </div>
   </div>
 
@@ -154,11 +104,11 @@ export default {
     </div>
   </div>
 
-  <Services ref="services" :servicesData="billingData.servicesData"></Services>
+  <Services ref="services" :ttsId="ttsId"></Services>
 
-  <Account ref="account" :accountData="billingData.accountData"></Account>
+  <Account ref="account" :ttsId="ttsId"></Account>
 
-  <Sessions ref="sessions" :sessionsData="billingData.sessionsData"></Sessions>
+  <Sessions ref="sessions" :ttsId="ttsId"></Sessions>
 </template>
 
 <style src="./assets/styles/_style.css"></style>

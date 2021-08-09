@@ -1,18 +1,65 @@
 <script>
-import {ref} from "vue";
+import { ref } from "vue";
+import { requestAccountData } from "@/requests/api";
+import { numberFormat } from "@/helpers/helpers";
 
 export default {
   name: "Account",
   props: {
-    accountData: {type: Object, required: true},
+    ttsId: {
+      type: [String, Number],
+      required: true
+    },
   },
+
   setup() {
     const bookmarkIsActive = ref(false);
-    return {bookmarkIsActive};
+    return { bookmarkIsActive };
   },
-  mounted() {
-    //console.log('Bookmark account is mounted');
+
+  data() {
+    return {
+      accountData: {},
+    }
   },
+
+  created() {
+    this.getAccountData();
+  },
+
+  methods: {
+
+    getAccountData() {
+
+      if (this.ttsId) {
+        const hydraResponse = requestAccountData(this.ttsId);
+
+        hydraResponse.then((result) => {
+
+          let sortedData = result;
+
+          sortedData.forEach(account => {
+            account.payment.forEach(payment => {
+              payment.N_SUM_OUT = numberFormat(payment.N_SUM_OUT, 2, '.', ' ');
+              payment.N_BALANCE = numberFormat(payment.N_BALANCE, 2, '.', ' ');
+              payment.D_BEGIN = new Date(payment.D_BEGIN).toISOString().split('T')[0];
+              payment.D_END = new Date(payment.D_END).toISOString().split('T')[0];
+              payment.D_OPER = new Date(payment.D_OPER).toISOString().split('T')[0];
+            });
+          });
+
+          this.accountData = sortedData;
+          //console.log(result);
+          //console.log(this.accountData);
+        });
+      }
+    },
+
+    toggleTableView(refName) {
+      console.log(refName);
+    }
+
+  }
 };
 </script>
 
@@ -20,19 +67,18 @@ export default {
   <div v-if="bookmarkIsActive" class="d-block">
      <div class="elz d-table w100p pH16 pB16">
 
-       <table class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1 uStrip stripLD borNoneIn   bg bg-primary bgL5    stripSelCol4">
+       <table class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1 uStrip stripLD borNoneIn bg bg-primary bgL5">
          <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
          <tr class="tr">
-           <td class="td wmn240 h56">
-
-             <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut sel">
+           <td class="td wmn160 h56">
+             <div ref="accountNumber" class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
 
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/search.svg');"></i>
+                   <i @click="toggleTableView('accountNumber')" class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/search.svg');"></i>
                  </div>
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 showSelIn">
-                   <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross1.svg');"></i>
+                   <i @click="toggleTableView('accountNumber')" class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Закрыть поиск" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross1.svg');"></i>
                  </div>
                </div>
 
@@ -42,7 +88,14 @@ export default {
                  </div>
                  <div class="elz p-rel d-block grY1">
                    <div class="elz h100p evNone"></div>
-                   <input type="text" class="elz p-abs s100p p-EA d-block bold z1 pV4 borB1 br br-focus visSelIn" placeholder="Введите номер счета">
+                   <!--<input type="text" class="elz p-abs s100p p-EA d-block bold z1 pV4 borB1 br br-focus visSelIn" placeholder="Введите номер счета">-->
+                   <select class="elz p-abs s100p p-EA d-block bold z1 pV4 cur-pointer borB1 br br-focus visSelIn">
+                     <option class="bg bg-primary bgL5 bgLInvD">Выберите Абон. плату</option>
+                     <option class="bg bg-primary bgL5 bgLInvD">234905876290348756983272342342343</option>
+                     <option class="bg bg-primary bgL5 bgLInvD">6464637847344</option>
+                     <option class="bg bg-primary bgL5 bgLInvD">82879829982833737</option>
+                     <option class="bg bg-primary bgL5 bgLInvD">000</option>
+                   </select>
                    <div class="elz d-block p-abs pT5 w100p hide">
                      <div class="elz d-block bsh bsh-default2 z2 r3 bg bg-primary bgL20 pV8">
                        <div class="d-block pV10 pH16 cur-pointer bgHov bg-primary fn fnHovL-10 fnHovLInvD fnSelLInvD opAct07">Autocomplete Item 1</div>
@@ -56,19 +109,18 @@ export default {
                  </div>
                </div>
 
-               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10">
-                 <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
-                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
+<!--               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10 hide">
+                 <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
+                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="&#45;&#45;elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
-               </div>
-
+               </div>-->
              </div>
-
            </td>
            <td class="td w240 wmn240">
-
-             <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut sel">
-
+             <div class="elz d-block bold">Услуга</div>
+           </td>
+           <td class="td w160 wmn160">
+             <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
                <div class="elz d-block noShrink op025 opHovIn10 mR8">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
                    <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cash.svg');"></i>
@@ -80,7 +132,7 @@ export default {
 
                <div class="elz d-grid grPos hmn24 grow">
                  <div class="elz d-flex a-H">
-                   <div class="elz d-block bold grY1 pV4 pT1 borB1 invSelIn">Абон. плата: <b>64875.00</b></div>
+                   <div class="elz d-block bold grY1 pV4 pT1 borB1 invSelIn">Абон. плата</div>
                  </div>
                  <div class="elz p-rel d-block grY1">
                    <div class="elz h100p evNone"></div>
@@ -94,11 +146,11 @@ export default {
                  </div>
                </div>
 
-               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10">
+<!--               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
-                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
+                   <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="&#45;&#45;elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
-               </div>
+               </div>-->
 
              </div>
            </td>
@@ -165,17 +217,8 @@ export default {
                    <div class="elz h100p evNone"></div>
                    <input type="text" class="elz p-abs s100p p-EA d-block bold z1 pV4 borB1 br br-focus visSelIn" placeholder="Период ПО">
 
-
-
-
-
-
-
-
-
-
-                   <div class="picker__mask hide"></div>
-                   <div class="picker__frame pT8">
+<!--                   <div class="picker__mask hide"></div>-->
+<!--                   <div class="picker__frame pT8">
                      <div class="picker__warp">
                        <div class="picker__box">
                          <div class="picker__header">
@@ -200,8 +243,8 @@ export default {
                                <option value="2021">2021</option>
                              </select>
                            </div>
-                           <div class="picker__nav--prev"></div>
-                           <div class="picker__nav--next"></div>
+                           <div class="picker__nav&#45;&#45;prev"></div>
+                           <div class="picker__nav&#45;&#45;next"></div>
                          </div>
                          <table class="picker__table">
                            <thead>
@@ -217,71 +260,61 @@ export default {
                            </thead>
                            <tbody>
                            <tr>
-                             <td role="presentation"><div class="picker__day picker__day--outfocus">27</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--outfocus">28</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--outfocus">29</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--outfocus">30</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus picker__day--selected picker__day--highlighted">1</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled">2</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled">3</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;outfocus">27</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;outfocus">28</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;outfocus">29</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;outfocus">30</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus picker__day&#45;&#45;selected picker__day&#45;&#45;highlighted">1</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus picker__day&#45;&#45;disabled">2</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus picker__day&#45;&#45;disabled">3</div></td>
                            </tr>
                            <tr>
-                             <td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled">4</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled">5</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus picker__day--disabled">6</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">7</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">8</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">9</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">10</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus picker__day&#45;&#45;disabled">4</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus picker__day&#45;&#45;disabled">5</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus picker__day&#45;&#45;disabled">6</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">7</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">8</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">9</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">10</div></td>
                            </tr>
                            <tr>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">11</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">12</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">13</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">14</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">15</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">16</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">17</div>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">11</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">12</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">13</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">14</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">15</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">16</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">17</div>
                              </td>
                            </tr>
                            <tr>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">18</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">19</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">20</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">21</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">22</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">23</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">24</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">18</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">19</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">20</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">21</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">22</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">23</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">24</div></td>
                            </tr>
                            <tr>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">25</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">26</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">27</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">28</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">29</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">30</div></td>
-                             <td role="presentation"><div class="picker__day picker__day--infocus">31</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">25</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">26</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">27</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">28</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">29</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">30</div></td>
+                             <td role="presentation"><div class="picker__day picker__day&#45;&#45;infocus">31</div></td>
                            </tr>
                            </tbody>
                          </table>
                          <div class="picker__footer">
-                           <button class="picker__button--today" type="button">Today</button>
-                           <button class="picker__button--clear" type="button">Clear</button>
-                           <button class="picker__button--close" type="button">Close</button>
+                           <button class="picker__button&#45;&#45;today" type="button">Today</button>
+                           <button class="picker__button&#45;&#45;clear" type="button">Clear</button>
+                           <button class="picker__button&#45;&#45;close" type="button">Close</button>
                          </div>
                        </div>
                      </div>
-                   </div>
-
-
-
-
-
-
-
-
-
-
+                   </div>-->
 
                  </div>
                </div>
@@ -294,115 +327,31 @@ export default {
 
              </div>
            </td>
-           <td class="td w120 wmn120">
-             <div class="elz d-block bold">Доп. соглашение</div>
-           </td>
-           <td class="td w160 wmn160">
-             <div class="elz d-block bold">Блокировка</div>
-           </td>
-           <td class="td w100 wmn100">
-             <div class="elz d-block bold">Лицевой счет</div>
-           </td>
            <td class="td w100 wmn100">
              <div class="elz d-block bold">Баланс</div>
+           </td>
+           <td class="td w120 wmn120">
+             <div class="elz d-block bold">Дата операции</div>
            </td>
          </tr>
          </thead>
          <tbody class="elz tbody pad p8 stripOdd stripHover">
-         <tr class="tr">
-           <td class="td">
-             <div class="d-block pL32">71940168</div>
-           </td>
-           <td class="td bold">66963.4300</td>
-           <td class="td">Рубль</td>
-           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
-           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
-           <td class="td">Д/С № Н#999</td>
-           <td class="td">Блокировка отсутствует</td>
-           <td class="td"></td>
-           <td class="td"></td>
-         </tr>
-         <tr class="tr">
-           <td class="td">
-             <div class="d-block pL32">71940168</div>
-           </td>
-           <td class="td bold">66963.4300</td>
-           <td class="td">Рубль</td>
-           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
-           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
-           <td class="td">Д/С № Н#999</td>
-           <td class="td">Блокировка отсутствует</td>
-           <td class="td"></td>
-           <td class="td"></td>
-         </tr>
-         <tr class="tr">
-           <td class="td">
-             <div class="d-block pL32">71940168</div>
-           </td>
-           <td class="td bold">66963.4300</td>
-           <td class="td">Рубль</td>
-           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
-           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
-           <td class="td">Д/С № Н#999</td>
-           <td class="td">Блокировка отсутствует</td>
-           <td class="td"></td>
-           <td class="td"></td>
-         </tr>
-         <tr class="tr">
-           <td class="td">
-             <div class="d-block pL32">71940168</div>
-           </td>
-           <td class="td bold">66963.4300</td>
-           <td class="td">Рубль</td>
-           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
-           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
-           <td class="td">Д/С № Н#999</td>
-           <td class="td">Блокировка отсутствует</td>
-           <td class="td"></td>
-           <td class="td"></td>
-         </tr>
-         <tr class="tr">
-           <td class="td">
-             <div class="d-block pL32">71940168</div>
-           </td>
-           <td class="td bold">66963.4300</td>
-           <td class="td">Рубль</td>
-           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
-           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
-           <td class="td">Д/С № Н#999</td>
-           <td class="td">Блокировка отсутствует</td>
-           <td class="td"></td>
-           <td class="td"></td>
-         </tr>
-         <tr class="tr">
-           <td class="td">
-             <div class="d-block pL32">71940168</div>
-           </td>
-           <td class="td bold">66963.4300</td>
-           <td class="td">Рубль</td>
-           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
-           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
-           <td class="td">Д/С № Н#999</td>
-           <td class="td">Блокировка отсутствует</td>
-           <td class="td"></td>
-           <td class="td"></td>
-         </tr>
-         <tr class="tr">
-           <td class="td">
-             <div class="d-block pL32">71940168</div>
-           </td>
-           <td class="td bold">66963.4300</td>
-           <td class="td">Рубль</td>
-           <td class="td"><div class="d-block pL32">2021.01.13</div></td>
-           <td class="td"><div class="d-block pL32">Неопределенно</div></td>
-           <td class="td">Д/С № Н#999</td>
-           <td class="td">Блокировка отсутствует</td>
-           <td class="td"></td>
-           <td class="td"></td>
-         </tr>
+         <template v-for="accountItem in accountData">
+           <tr v-for="paymentItem in accountItem.payment" class="tr">
+             <td class="td">
+               <div class="d-block pL32">{{ accountItem.vcCode }}</div>
+             </td>
+             <td class="td">{{ paymentItem.VC_GOOD_NAME }}</td>
+             <td class="td bold">{{ paymentItem.N_SUM_OUT }}</td>
+             <td class="td">Рубль</td>
+             <td class="td"><div class="d-block pL32">{{ paymentItem.D_BEGIN }}</div></td>
+             <td class="td"><div class="d-block pL32">{{ paymentItem.D_END }}</div></td>
+             <td class="td">{{ paymentItem.N_BALANCE }}</td>
+             <td class="td">{{ paymentItem.D_OPER }}</td>
+           </tr>
+         </template>
          </tbody>
        </table>
-
      </div>
   </div>
 </template>

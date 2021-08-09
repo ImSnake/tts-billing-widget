@@ -1,10 +1,15 @@
 <script>
 import { ref } from "vue";
+import { requestServicesData } from "@/requests/api";
+import { getWordEnding } from "@/helpers/helpers";
 
 export default {
   name: "Services",
   props: {
-    servicesData: { type: Object, required: true },
+    ttsId: {
+      type: [String, Number],
+      required: true
+    },
   },
 
   setup() {
@@ -12,10 +17,67 @@ export default {
     return { bookmarkIsActive };
   },
 
+  data() {
+    return {
+      servicesData: {},
+    }
+  },
+
+  created() {
+    this.getServicesData();
+  },
+
   methods: {
+
     toggleTableWrapper(refName) {
       this.$refs[refName].classList.toggle('sel');
-    }
+    },
+
+    getServicesData() {
+      if (this.ttsId) {
+
+        const hydraResponse = requestServicesData(this.ttsId);
+
+        hydraResponse.then((result) => {
+
+          let sortedData = result;
+
+          const currentDate = new Date().toISOString().split('T')[0];
+
+          sortedData.forEach(contract => {
+
+            let summary = 0;
+
+            contract.services.forEach(service => {
+
+              console.log(service.dEnd >= currentDate || !service.dEnd);
+
+              if (service.dEnd >= currentDate || !service.dEnd) {
+                summary += service.price;
+                service.status = 1;
+              } else {
+                service.status = 0;
+              }
+
+              service.dBegin = new Date(service.dBegin).toISOString().split('T')[0];
+              service.dEnd = (service.dEnd) ? new Date(service.dEnd).toISOString().split('T')[0] : '-';
+
+            });
+
+            contract.totalCost = summary;
+            contract.totalCurrency = getWordEnding(contract.totalCost, 'Рубль', 'Рубля', 'Рублей');
+
+            contract.services.sort((a, b) => a.status < b.status && 1 || -1);
+
+          });
+
+          this.servicesData = sortedData;
+
+          console.log(result);
+          console.log(this.servicesData);
+        });
+      }
+    },
 
   },
 
@@ -27,8 +89,7 @@ export default {
 
     <div class="elz d-table w100p pH16 pB16">
 
-      <table v-for="contractItem in servicesData" class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1
-       uStrip stripLD borNoneIn bg bg-primary bgL5 stripSelCol4">
+      <table v-for="contractItem in servicesData" class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1 uStrip stripLD borNoneIn bg bg-primary bgL5">
         <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
         <tr class="tr">
           <td class="td w1 h56">
@@ -40,29 +101,29 @@ export default {
           <td class="td wmn200">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block bold mL8 mT4">{{ contractItem.CONTRACT }}</div>
+                <div class="elz d-block bold mL8 mT4">{{ contractItem.contract }}</div>
               </div>
               <div class="elz d-flex f-wrap">
                 <div class="elz d-block mL8 mT4">Тип: <b class="bold">???</b></div>
-                <div class="elz d-block mL8 mT4">Новая тарифная зона: <b class="bold">???</b></div>
+                <div class="elz d-block mL8 mT4">Новая тарифная зона: <b class="bold">{{ contractItem.zone }}</b></div>
               </div>
             </div>
           </td>
-          <td class="td w240 wmn240">
+          <td class="td w180 wmn180">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4 nowrap">Баланс: <b class="bold">{{ contractItem.BALANCE }}</b></div>
+                <div class="elz d-block mL8 mT4 nowrap">Баланс: <b class="bold">{{ contractItem.balance }}</b></div>
               </div>
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4 nowrap">Лицевой счет: <b class="bold">{{ contractItem.ACCOUNT }}</b></div>
+                <div class="elz d-block mL8 mT4 nowrap">Лицевой счет: <b class="bold">{{ contractItem.account }}</b></div>
               </div>
             </div>
           </td>
-          <td class="td w240 wmn240 al-right">
+          <td class="td w120 wmn120 al-right">
             <div class="elz">Абон. плата: <b class="bold">{{ contractItem.totalCost }}</b></div>
           </td>
           <td class="td w64 wmn64">
-            <div class="elz d-block">Рубль</div>
+            <div class="elz d-block">{{ contractItem.totalCurrency }}</div>
           </td>
           <td class="td w120 wmn120">
             <div class="elz d-block bold">Период С</div>
@@ -78,16 +139,19 @@ export default {
         <tbody class="elz tbody pad p8 stripOdd stripHover">
         <tr v-for="servicesItem in contractItem.services" class="tr">
           <td class="td">
-            <div class="elz d-flex a-X s16 bor2 br br-green rCircle">
-              <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Активный" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross.svg');"></div>
+            <div v-if="servicesItem.status === 1" class="elz d-flex a-X s16 bor2 br br-green rCircle">
+              <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Услуга активна" style="--elzMsk: url('https://lelouch.ru/uploads/icons/checkmark.svg');"></div>
+            </div>
+            <div v-else class="elz d-flex a-X s16 bor2 br br-grey rCircle">
+              <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-grey bgBef-CC cur-help" title="Услуга заблокирована" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross.svg');"></div>
             </div>
           </td>
-          <td class="td">{{ servicesItem.SERVICE }}</td>
-          <td class="td">{{ servicesItem.SERVICE_LOCK }}</td>
-          <td class="td bold al-right nowrap">{{ servicesItem.PRICE }}</td>
+          <td class="td">{{ servicesItem.service }}</td>
+          <td class="td">{{ servicesItem.service_lock }}</td>
+          <td class="td bold al-right nowrap">{{ servicesItem.price }}</td>
           <td class="td">Рубль</td>
-          <td class="td">{{ servicesItem.D_BEGIN }}</td>
-          <td class="td">{{ servicesItem.D_END }}</td>
+          <td class="td">{{ servicesItem.dBegin }}</td>
+          <td class="td">{{ servicesItem.dEnd }}</td>
           <td class="td">???</td>
         </tr>
         </tbody>
@@ -128,7 +192,7 @@ export default {
 
     </div>
 
-    <div ref="tableClosedContracts" class="d-block hideSelOut5 showSelOut5 pB16"><!--СЮДА ДОБАВИТЬ КЛАСС sel ЧТОБЫ ОНО ОТКРЫВАЛОСЬ, И УБРАТЬ, ЧТОБЫ ЗАКРЫВАЛОСЬ -->
+    <div ref="tableClosedContracts" class="d-block hideSelOut5 showSelOut5 pB16">
 
       <div class="elz pH16">
         <div @click="toggleTableWrapper('tableClosedContracts')" class="elz d-flex a-H p16 r3 cur-pointer fn-9 bg bg-secondary bgHovL5 fn fn-secondary-t opAct07" title="Показать завершенные контракты">
@@ -137,7 +201,7 @@ export default {
             <div class="elz d-block p-rel mskBef s12 cFillBef bgBef-CC deg180 showSelIn5" title="Активный" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></div>
           </div>
           <div class="elz d-flex f-wrap grow mEA-8">
-            <div class="elz d-block mEA8 bold">Показать незавершенные контракты</div>
+            <div class="elz d-block mEA8 bold">Показать завершенные контракты</div>
             <div class="elz d-block growZ"></div>
             <div class="elz d-block mEA8">Всего: <b class="bold">45</b></div>
           </div>
@@ -149,8 +213,8 @@ export default {
           <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
           <tr class="tr">
             <td class="td td w1 h56">
-              <div class="elz d-flex a-X s16 bor2 br br-green rCircle">
-                <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Активный" style="--elzMsk: url('https://lelouch.ru/uploads/icons/play.svg');"></div>
+              <div class="elz d-flex a-X s16 bor2 br br-grey rCircle">
+                <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-grey bgBef-CC cur-help" title="Контракт завершен" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross.svg');"></div>
               </div>
             </td>
             <td class="td td wmn200">
@@ -282,8 +346,8 @@ export default {
           <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
           <tr class="tr">
             <td class="td td w1 h56">
-              <div class="elz d-flex a-X s16 bor2 br br-green rCircle">
-                <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Активный" style="--elzMsk: url('https://lelouch.ru/uploads/icons/play.svg');"></div>
+              <div class="elz d-flex a-X s16 bor2 br br-grey rCircle">
+                <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-grey bgBef-CC cur-help" title="Контракт завершен" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross.svg');"></div>
               </div>
             </td>
             <td class="td td wmn200">
