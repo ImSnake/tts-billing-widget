@@ -18,6 +18,7 @@ export const dateFormatDdMmYyyy = (date) => {
   return date.replace(format, '$3.$2.$1');
 };
 
+
 /**
  * Валидация Даты
  * @param date
@@ -26,6 +27,7 @@ export const dateFormatDdMmYyyy = (date) => {
 export const dateIsValid = (date)=> {
   return date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date);
 };
+
 
 /**
  * Склонить окончание исчисляемого существительного в зависимости от переданного количества
@@ -42,6 +44,7 @@ export const getWordEnding = (count, one, two, five) => {
   (n >= 5 && n <= 20) ? result = five : (n10 > 1 && n10 < 5) ? result = two : (n10 === 1) ? result = one : result = five;
   return result;
 };
+
 
 /**
  * // Format a number with grouped thousands
@@ -83,6 +86,7 @@ export const numberFormat = (number, decimals, dec_point, thousands_sep) => {
 
   return km + kw + kd;
 };
+
 
 /**
  * Сравнить два объекта с одним уровнем вложенности
