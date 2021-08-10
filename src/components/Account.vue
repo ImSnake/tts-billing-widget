@@ -70,10 +70,10 @@ export default {
        <table class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1 uStrip stripLD borNoneIn bg bg-primary bgL5">
          <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
          <tr class="tr">
-           <td class="td wmn160 h56">
+           <td class="td w120 h56 nowrap">
              <div ref="accountNumber" class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
 
-               <div class="elz d-block noShrink op025 opHovIn10 mR8">
+               <div class="elz d-block noShrink op025 opHovIn10 mR8 invisible">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
                    <i @click="toggleTableView('accountNumber')" class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/search.svg');"></i>
                  </div>
@@ -116,12 +116,12 @@ export default {
                </div>-->
              </div>
            </td>
-           <td class="td w240 wmn240">
-             <div class="elz d-block bold">Услуга</div>
+           <td class="td">
+             <div class="elz d-block bold pL32">Услуга</div>
            </td>
-           <td class="td w160 wmn160">
+           <td class="td w160 al-right">
              <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
-               <div class="elz d-block noShrink op025 opHovIn10 mR8">
+               <div class="elz d-block noShrink op025 opHovIn10 mR8 hide">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
                    <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cash.svg');"></i>
                  </div>
@@ -132,7 +132,7 @@ export default {
 
                <div class="elz d-grid grPos hmn24 grow">
                  <div class="elz d-flex a-H">
-                   <div class="elz d-block bold grY1 pV4 pT1 borB1 invSelIn">Абон. плата</div>
+                   <div class="elz d-block bold growX grY1 pV4 pT1 borB1 invSelIn">Абон. плата, ₽</div>
                  </div>
                  <div class="elz p-rel d-block grY1">
                    <div class="elz h100p evNone"></div>
@@ -154,13 +154,13 @@ export default {
 
              </div>
            </td>
-           <td class="td w64 wmn64">
+           <!--<td class="td w64 pL32">
              <div class="elz d-block bold">Рубль</div>
-           </td>
-           <td class="td w150 wmn150">
+           </td>-->
+           <td class="td w120">
              <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
 
-               <div class="elz d-block noShrink op025 opHovIn10 mR8">
+               <div class="elz d-block noShrink op025 opHovIn10 mR8 invisible">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
                    <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/calendar.svg');"></i>
                  </div>
@@ -189,7 +189,7 @@ export default {
                  </div>
                </div>
 
-               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10 sel">
+               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10 hide">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
                    <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
@@ -197,10 +197,10 @@ export default {
 
              </div>
            </td>
-           <td class="td w150 wmn150">
-             <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut sel">
+           <td class="td w120">
+             <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
 
-               <div class="elz d-block noShrink op025 opHovIn10 mR8">
+               <div class="elz d-block noShrink op025 opHovIn10 mR8 invisible">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07 hideSelIn">
                    <i class="elz d-block s16 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/calendar.svg');"></i>
                  </div>
@@ -319,7 +319,7 @@ export default {
                  </div>
                </div>
 
-               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10">
+               <div class="elz d-block noShrink op0 opHovIn10 mL4 opSel10 hide">
                  <div class="elz d-flex s24 a-X rCircle cur-pointer opAct07">
                    <i class="elz d-block s8 p-rel mskBef cFillBef bgBef-CC" title="Поиск по столбцу" style="--elzMsk: url('https://lelouch.ru/uploads/icons/arrow1.svg');"></i>
                  </div>
@@ -327,11 +327,11 @@ export default {
 
              </div>
            </td>
-           <td class="td w100 wmn100">
-             <div class="elz d-block bold">Баланс</div>
+           <td class="td w100 al-right">
+             <div class="elz d-block bold">Баланс, ₽</div>
            </td>
-           <td class="td w120 wmn120">
-             <div class="elz d-block bold">Дата операции</div>
+           <td class="td w120 nowrap">
+             <div class="elz d-block bold pH32">Дата операции</div>
            </td>
          </tr>
          </thead>
@@ -341,13 +341,13 @@ export default {
              <td class="td">
                <div class="d-block pL32">{{ accountItem.vcCode }}</div>
              </td>
-             <td class="td">{{ paymentItem.VC_GOOD_NAME }}</td>
-             <td class="td bold">{{ paymentItem.N_SUM_OUT }}</td>
-             <td class="td">Рубль</td>
+             <td class="td"><div class="d-block pL32">{{ paymentItem.VC_GOOD_NAME }}</div></td>
+             <td class="td bold al-right">{{ paymentItem.N_SUM_OUT }}</td>
+             <!--<td class="td">Рубль</td>-->
              <td class="td"><div class="d-block pL32">{{ paymentItem.D_BEGIN }}</div></td>
              <td class="td"><div class="d-block pL32">{{ paymentItem.D_END }}</div></td>
-             <td class="td">{{ paymentItem.N_BALANCE }}</td>
-             <td class="td">{{ paymentItem.D_OPER }}</td>
+             <td class="td al-right">{{ paymentItem.N_BALANCE }}</td>
+             <td class="td"><div class="d-block pL32">{{ paymentItem.D_OPER }}</div></td>
            </tr>
          </template>
          </tbody>

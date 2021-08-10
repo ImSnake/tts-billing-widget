@@ -75,8 +75,8 @@ export default {
         <a href="#" target="_blank"
            class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.UBN }}</a>
       </div>
-      <div class="elz d-block mL16 mT8">Телефон: <b class="bold nowrap">{{ customerData.CustomerPhone ? customerData.CustomerPhone : '&nbsp;-' }}</b></div>
-      <div class="elz d-block mL16 mT8">Адрес: <b class="bold">{{ customerData.LegalAdress ? customerData.LegalAdress : '&nbsp;-' }}</b></div>
+      <div class="elz d-block mL16 mT8">Телефон: <b class="bold nowrap">{{ customerData.CustomerPhone ? customerData.CustomerPhone : '&nbsp;нет&nbsp;данных' }}</b></div>
+      <div class="elz d-block mL16 mT8">Адрес: <b class="bold">{{ customerData.LegalAdress ? customerData.LegalAdress : '&nbsp;нет&nbsp;данных' }}</b></div>
     </div>
   </div>
 
