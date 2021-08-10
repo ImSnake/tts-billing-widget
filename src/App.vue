@@ -14,8 +14,9 @@ export default {
 
   data() {
     return {
-      ttsId: new URL(location.href).searchParams.get("CustomerID"),
       customerData: {},
+      ttsId: new URL(location.href).searchParams.get("CustomerID"),
+      userParams: {},
     };
   },
 
@@ -52,6 +53,10 @@ export default {
           this.customerData = result;
         });
       }
+    },
+
+    updateUserParams(userParams) {
+      this.userParams = userParams;
     }
 
   },
@@ -104,11 +109,23 @@ export default {
     </div>
   </div>
 
-  <Services ref="services" :ttsId="ttsId"></Services>
+  <Services
+      ref="services"
+      :ttsId="ttsId"
+      :userParams="userParams"   >
+  </Services>
 
-  <Account ref="account" :ttsId="ttsId"></Account>
+  <Account
+      ref="account"
+      :ttsId="ttsId"   >
+  </Account>
 
-  <Sessions ref="sessions" :ttsId="ttsId"></Sessions>
+  <Sessions
+      ref="sessions"
+      :ttsId="ttsId"
+      @update-user-params="updateUserParams"   >
+  </Sessions>
+
 </template>
 
 <style src="./assets/styles/_style.css"></style>

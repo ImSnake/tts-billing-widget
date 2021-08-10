@@ -10,6 +10,10 @@ export default {
       type: [String, Number],
       required: true
     },
+    userParams: {
+      type: Object,
+      required: true
+    }
   },
 
   setup() {
@@ -49,32 +53,25 @@ export default {
             let summary = 0;
 
             contract.services.forEach(service => {
-
-              console.log(service.dEnd >= currentDate || !service.dEnd);
-
+              //console.log(service.dEnd >= currentDate || !service.dEnd);
               if (service.dEnd >= currentDate || !service.dEnd) {
                 summary += service.price;
                 service.status = 1;
               } else {
                 service.status = 0;
               }
-
               service.dBegin = new Date(service.dBegin).toISOString().split('T')[0];
               service.dEnd = (service.dEnd) ? new Date(service.dEnd).toISOString().split('T')[0] : '-';
-
             });
 
             contract.totalCost = summary;
             contract.totalCurrency = getWordEnding(contract.totalCost, 'Рубль', 'Рубля', 'Рублей');
-
             contract.services.sort((a, b) => a.status < b.status && 1 || -1);
-
           });
 
           this.servicesData = sortedData;
-
-          console.log(result);
-          console.log(this.servicesData);
+          //console.log(result);
+          //console.log(this.servicesData);
         });
       }
     },
@@ -168,8 +165,8 @@ export default {
           <td class="td td wmn200">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4">Login: <b class="bold">lk0047162</b></div>
-                <div class="elz d-block mL8 mT4">Password: <b class="bold">2D152E4E</b></div>
+                <div class="elz d-block mL8 mT4">Login: <b class="bold">{{ userParams.login }}</b></div>
+                <div class="elz d-block mL8 mT4">Password: <b class="bold">{{ userParams.password }}</b></div>
               </div>
               <div class="elz d-flex f-wrap">
                 <div class="elz d-block mL8 mT4">Тип: <b class="bold">Доступ в личный кабинет</b></div>

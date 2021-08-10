@@ -1,4 +1,14 @@
 /**
+ * Формат даты из предстваления "2021-06-01T00:28:36.000Z" в "2021-06-01 00:28:36"
+ * @param date
+ * @returns {string}
+ */
+export const dayTimeFullFormat = (date) => {
+ return date.toISOString().split('T').join(' ').slice(0, 19);
+};
+
+
+/**
  * Формат даты из предстваления "2021-01-31" в "01.01.2021"
  * @param date
  * @returns {string}
