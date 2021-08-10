@@ -99,24 +99,24 @@ export default {
           <td class="td">
             <div class="elz d-block bold">Завершена</div>
           </td>
-          <td class="td">
+          <!--<td class="td">
             <div class="elz d-block bold">Состояние</div>
-          </td>
+          </td>-->
           <td class="td">
             <div class="elz d-block bold">Абонентское оборудование</div>
           </td>
           <td class="td">
             <div class="elz d-block bold">Операторское оборудование</div>
           </td>
-          <td class="td">
+          <!--<td class="td">
             <div class="elz d-block bold">Абонентский профиль</div>
-          </td>
+          </td>-->
           <td class="td">
             <div class="elz d-block bold">Операторский профиль</div>
           </td>
-          <td class="td">
+          <!--<td class="td">
             <div class="elz d-block bold">Сервисный абонентский профиль</div>
-          </td>
+          </td>-->
           <td class="td">
             <div class="elz d-block bold">Последнее обновления</div>
           </td>
@@ -140,9 +140,6 @@ export default {
           </td>
           <td class="td">
             <div class="elz d-block bold">User-Password</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block bold">Framed-IP-Address</div>
           </td>
           <td class="td">
             <div class="elz d-block bold">Speed-Download-Bps</div>
@@ -191,109 +188,6 @@ export default {
         </tr>
         </thead>
         <tbody class="elz tbody pad p8 stripOdd stripHover">
-        <tr class="tr">
-          <td class="td">
-            <div class="elz d-block">8505146-vlan50-16</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">PPPOE</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">08.08.2021 13:32:20</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">09.08.2021 13:32:20</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">Завершена успешно</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">Оконечное оборудование-639</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">-</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">MPD_PPPOE</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">-</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">MPD_PPPOE</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">09.08.2021 13:32:20</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">09.08.2021 13:32:59</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">HARD (unknown) base/pppoe_mpd</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">610fb2db3b2d1e48f549a86c.1</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">Session-Timeout</div>
-          </td>
-
-
-
-          <td class="td">
-            <div class="elz d-block">vvk530993</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">******</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">-</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">104857600</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">104857600</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">SERV_STATE_Provider</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">PPPoE</div>
-          </td>
-
-
-          <td class="td">
-            <div class="elz d-block">8505136-PPP-37</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">50ff205e41ef / 50:ff:20:5e:41:ef / vlan50</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">10.12.0.5</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">None</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">85.91.99.134</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">vpn1-hills.naukanet.ru</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">vlan50</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">mpd</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">10.1.3.242</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">vvk530993</div>
-          </td>
-        </tr>
         <tr v-for="(sessionItem, index) in sessionsData" class="tr">
           <td class="td">
             <div class="elz d-block">{{ sessionItem.VC_EXT_ID }}</div>
@@ -307,24 +201,24 @@ export default {
           <td class="td">
             <div class="elz d-block">{{ sessionItem.D_FINISH }}</div>
           </td>
-          <td class="td">
+          <!--<td class="td">
             <div class="elz d-block">???</div>
-          </td>
+          </td>-->
           <td class="td">
             <div class="elz d-block">{{ sessionItem.VC_CUSTOMER_EQUIPMENT }}</div>
           </td>
           <td class="td">
             <div class="elz d-block">???</div>
           </td>
+          <!--<td class="td">
+            <div class="elz d-block">???</div>
+          </td>-->
           <td class="td">
             <div class="elz d-block">???</div>
           </td>
-          <td class="td">
+          <!--<td class="td">
             <div class="elz d-block">???</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">???</div>
-          </td>
+          </td>-->
           <td class="td">
             <div class="elz d-block">{{ sessionItem.D_LAST_UPD }}</div>
           </td>
@@ -341,14 +235,12 @@ export default {
             <div class="elz d-block">{{ sessionItem.VC_TERMINATION_CODE }}</div>
           </td>
 
+
           <td class="td">
             <div class="elz d-block">{{ sessionItem.username }}</div>
           </td>
           <td class="td">
             <div class="elz d-block">{{ sessionItem.password }}</div>
-          </td>
-          <td class="td">
-            <div class="elz d-block">???</div>
           </td>
           <td class="td">
             <div class="elz d-block">{{ sessionItem.speedDownload }}</div>
@@ -362,6 +254,7 @@ export default {
           <td class="td">
             <div class="elz d-block">{{ sessionItem.authScheme }}</div>
           </td>
+
 
           <td class="td">
             <div class="elz d-block">{{ sessionItem.multiSessionId }}</div>

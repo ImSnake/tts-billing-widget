@@ -72,11 +72,14 @@ export default {
            class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.CustomerID }}</a>
       </div>
       <div class="elz d-block mL16 mT8">HYDRA:
-        <a href="#" target="_blank"
+        <a :href="'https://hydra.naukanet.ru:8000/subjects/users/edit/'+customerData.UBN" target="_blank"
            class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.UBN }}</a>
       </div>
-      <div class="elz d-block mL16 mT8">Телефон: <b class="bold nowrap">{{ customerData.CustomerPhone ? customerData.CustomerPhone : '&nbsp;нет&nbsp;данных' }}</b></div>
-      <div class="elz d-block mL16 mT8">Адрес: <b class="bold">{{ customerData.LegalAdress ? customerData.LegalAdress : '&nbsp;нет&nbsp;данных' }}</b></div>
+      <div class="elz d-block mL16 mT8">Телефон:&nbsp;
+        <b :class="[!customerData.CustomerPhone ? 'red__color' : '']" class="bold nowrap">{{ customerData.CustomerPhone ? customerData.CustomerPhone : 'нет&nbsp;данных' }}</b>
+      </div>
+      <div class="elz d-block mL16 mT8">Адрес:&nbsp;
+        <b :class="[!customerData.CustomerPhone ? 'red__color' : '']" class="bold">{{ customerData.LegalAdress ? customerData.LegalAdress : '&nbsp;нет&nbsp;данных' }}</b></div>
     </div>
   </div>
 
@@ -128,4 +131,11 @@ export default {
 
 </template>
 
+
 <style src="./assets/styles/_style.css"></style>
+
+<style>
+.red__color{
+  color: red;
+}
+</style>

@@ -39,7 +39,7 @@ export default {
           let sortedData = result;
 
           sortedData.forEach(account => {
-            account.payment.forEach(payment => {
+           account.payment.reverse().forEach(payment => {
               payment.N_SUM_OUT = numberFormat(payment.N_SUM_OUT, 2, '.', ' ');
               payment.N_BALANCE = numberFormat(payment.N_BALANCE, 2, '.', ' ');
               payment.D_BEGIN = new Date(payment.D_BEGIN).toISOString().split('T')[0];
