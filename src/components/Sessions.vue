@@ -39,17 +39,17 @@ export default {
           this.getUserParams(sortedData.slice(-1).pop());
 
           sortedData.forEach(session => {
-              session.D_START     = dayTimeFullFormat(new Date(session.D_START));
-              session.D_FINISH    = dayTimeFullFormat(new Date(session.D_FINISH));
-              session.D_LAST_UPD  = dayTimeFullFormat(new Date(session.D_LAST_UPD));
-              session.D_LAST_LOAD = dayTimeFullFormat(new Date(session.D_LAST_LOAD));
+              session.dateStart    = dayTimeFullFormat(new Date(session.D_START));
+              session.dateFinish   = dayTimeFullFormat(new Date(session.D_FINISH));
+              session.dateLastUpd  = dayTimeFullFormat(new Date(session.D_LAST_UPD));
+              session.dateLastLoad = dayTimeFullFormat(new Date(session.D_LAST_LOAD));
 
-              session.username =      session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80601).VC_VALUE;
-              session.password =      session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80701).VC_VALUE;
+              session.username      = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80601).VC_VALUE;
+              session.password      = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80701).VC_VALUE;
               session.speedDownload = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180101).VC_VALUE;
-              session.speedUpload =   session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180201).VC_VALUE;
-              session.serviceState =  session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80801).VC_VALUE;
-              session.authScheme =    session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180301).VC_VALUE;
+              session.speedUpload   = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180201).VC_VALUE;
+              session.serviceState  = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80801).VC_VALUE;
+              session.authScheme    = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180301).VC_VALUE;
 
               session.multiSessionId   = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'Acct-Multi-Session-Id').VC_VALUE;
               session.callingStationId = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'Calling-Station-Id').VC_VALUE;
@@ -196,10 +196,10 @@ export default {
             <div class="elz d-block">{{ sessionItem.VC_TYPE_NAME }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.D_START }}</div>
+            <div class="elz d-block">{{ sessionItem.dateStart }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.D_FINISH }}</div>
+            <div class="elz d-block">{{ sessionItem.dateFinish }}</div>
           </td>
           <!--<td class="td">
             <div class="elz d-block">???</div>
@@ -220,10 +220,10 @@ export default {
             <div class="elz d-block">???</div>
           </td>-->
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.D_LAST_UPD }}</div>
+            <div class="elz d-block">{{ sessionItem.dateLastUpd }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.D_LAST_LOAD }}</div>
+            <div class="elz d-block">{{ sessionItem.dateLastLoad }}</div>
           </td>
           <td class="td">
             <div class="elz d-block">{{ sessionItem.VC_SRC_APP }}</div>

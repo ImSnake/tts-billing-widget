@@ -51,12 +51,14 @@ export default {
         const hydraResponse = requestCustomerData(this.ttsId);
         hydraResponse.then((result) => {
           this.customerData = result;
+          console.log(this.customerData);
         });
       }
     },
 
     updateUserParams(userParams) {
       this.userParams = userParams;
+      console.log(this.userParams);
     }
 
   },

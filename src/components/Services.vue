@@ -1,7 +1,7 @@
 <script>
 import { ref } from "vue";
 import { requestServicesData } from "@/requests/api";
-import { getWordEnding } from "@/helpers/helpers";
+//import { getWordEnding } from "@/helpers/helpers";
 
 export default {
   name: "Services",
@@ -43,7 +43,7 @@ export default {
         const hydraResponse = requestServicesData(this.ttsId);
 
         hydraResponse.then((result) => {
-          console.log(result);
+
           let sortedData = result;
 
           const currentDate = new Date().toISOString().split('T')[0];
@@ -60,18 +60,21 @@ export default {
               } else {
                 service.status = 0;
               }
+
               service.dBegin = new Date(service.dBegin).toISOString().split('T')[0];
               service.dEnd = (service.dEnd) ? new Date(service.dEnd).toISOString().split('T')[0] : '-';
             });
 
             contract.totalCost = summary;
-            contract.totalCurrency = getWordEnding(contract.totalCost, 'Рубль', 'Рубля', 'Рублей');
+            //contract.totalCurrency = getWordEnding(contract.totalCost, 'Рубль', 'Рубля', 'Рублей');
+            //contract.balanceCurrency = getWordEnding(contract.balance, 'Рубль', 'Рубля', 'Рублей');
             contract.services.sort((a, b) => a.status < b.status && 1 || -1);
           });
 
           this.servicesData = sortedData;
 
-          //console.log(this.servicesData);
+          //console.log(result);
+          console.log(this.servicesData);
         });
       }
     },
@@ -111,18 +114,15 @@ export default {
           <td class="td w180 wmn180">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4 nowrap">Баланс: <b class="bold">{{ contractItem.balance }}</b></div>
+                <div class="elz d-block mL8 mT4 nowrap">Баланс:&nbsp;<b class="bold">{{ contractItem.balance + '&nbsp;₽' }}</b></div>
               </div>
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4 nowrap">Лицевой счет: <b class="bold">{{ contractItem.account }}</b></div>
+                <div class="elz d-block mL8 mT4 nowrap">Лицевой счет:&nbsp;<b class="bold">{{ contractItem.account }}</b></div>
               </div>
             </div>
           </td>
           <td class="td w120 wmn120 al-right">
-            <div class="elz">Абон. плата: <b class="bold">{{ contractItem.totalCost }}</b></div>
-          </td>
-          <td class="td w64 wmn64">
-            <div class="elz d-block">{{ contractItem.totalCurrency }}</div>
+            <div class="elz">Абон.&nbsp;плата:&nbsp;<b class="bold">{{ contractItem.totalCost + '&nbsp;₽' }}</b></div>
           </td>
           <td class="td w120 wmn120">
             <div class="elz d-block bold">Период С</div>
@@ -148,7 +148,6 @@ export default {
           <td class="td">{{ servicesItem.service }}</td>
           <td class="td">{{ servicesItem.service_lock }}</td>
           <td class="td bold al-right nowrap">{{ servicesItem.price }}</td>
-          <td class="td">Рубль</td>
           <td class="td">{{ servicesItem.dBegin }}</td>
           <td class="td">{{ servicesItem.dEnd }}</td>
           <!--<td class="td">???</td>-->
@@ -178,12 +177,12 @@ export default {
           <td class="td td w240 wmn240"></td>
           <td class="td td w240 wmn240 al-right"></td>
           <td class="td td w64 wmn64"></td>
-          <td class="td td w120 wmn120">
+          <!--<td class="td td w120 wmn120">
             <div class="elz d-block bold">Период С</div>
-          </td>
-          <td class="td td w120 wmn120">
+          </td>-->
+          <!--<td class="td td w120 wmn120">
             <div class="elz d-block bold">Период По</div>
-          </td>
+          </td>-->
           <td class="td td w150 wmn150"></td>
         </tr>
         </thead>

@@ -40,17 +40,17 @@ export default {
 
           sortedData.forEach(account => {
            account.payment.reverse().forEach(payment => {
-              payment.N_SUM_OUT = numberFormat(payment.N_SUM_OUT, 2, '.', ' ');
-              payment.N_BALANCE = numberFormat(payment.N_BALANCE, 2, '.', ' ');
-              payment.D_BEGIN = new Date(payment.D_BEGIN).toISOString().split('T')[0];
-              payment.D_END = new Date(payment.D_END).toISOString().split('T')[0];
-              payment.D_OPER = new Date(payment.D_OPER).toISOString().split('T')[0];
+              payment.paymentSum     = numberFormat(payment.N_SUM_OUT, 2, '.', ' ');
+              payment.accountBalance = numberFormat(payment.N_BALANCE, 2, '.', ' ');
+              payment.dateStart      = new Date(payment.D_BEGIN).toISOString().split('T')[0];
+              payment.dateFinish     = new Date(payment.D_END).toISOString().split('T')[0];
+              payment.dateOperation  = new Date(payment.D_OPER).toISOString().split('T')[0];
             });
           });
 
           this.accountData = sortedData;
           //console.log(result);
-          //console.log(this.accountData);
+          console.log(this.accountData);
         });
       }
     },
@@ -154,9 +154,6 @@ export default {
 
              </div>
            </td>
-           <!--<td class="td w64 pL32">
-             <div class="elz d-block bold">Рубль</div>
-           </td>-->
            <td class="td w120">
              <div class="elz d-flex a-H opHovOut showSelOut hideSelOut visSelOut invSelOut">
 
@@ -342,12 +339,11 @@ export default {
                <div class="d-block pL32">{{ accountItem.vcCode }}</div>
              </td>
              <td class="td"><div class="d-block pL32">{{ paymentItem.VC_GOOD_NAME }}</div></td>
-             <td class="td bold al-right">{{ paymentItem.N_SUM_OUT }}</td>
-             <!--<td class="td">Рубль</td>-->
-             <td class="td"><div class="d-block pL32">{{ paymentItem.D_BEGIN }}</div></td>
-             <td class="td"><div class="d-block pL32">{{ paymentItem.D_END }}</div></td>
-             <td class="td al-right">{{ paymentItem.N_BALANCE }}</td>
-             <td class="td"><div class="d-block pL32">{{ paymentItem.D_OPER }}</div></td>
+             <td class="td bold al-right">{{ paymentItem.paymentSum }}</td>
+             <td class="td"><div class="d-block pL32">{{ paymentItem.dateStart }}</div></td>
+             <td class="td"><div class="d-block pL32">{{ paymentItem.dateFinish }}</div></td>
+             <td class="td al-right">{{ paymentItem.accountBalance }}</td>
+             <td class="td"><div class="d-block pL32">{{ paymentItem.dateOperation }}</div></td>
            </tr>
          </template>
          </tbody>
