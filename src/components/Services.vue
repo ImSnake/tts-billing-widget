@@ -1,7 +1,6 @@
 <script>
 import { ref } from "vue";
 import { requestServicesData } from "@/requests/api";
-//import { getWordEnding } from "@/helpers/helpers";
 
 export default {
   name: "Services",
@@ -44,6 +43,12 @@ export default {
 
         hydraResponse.then((result) => {
 
+          if(result.statusCode === 500) {
+            console.log('ОШИБКА ПОЛУЧЕНИЯ ДАННЫХ');
+            console.log(result);
+            return;
+          }
+
           let sortedData = result;
 
           const currentDate = new Date().toISOString().split('T')[0];
@@ -66,8 +71,6 @@ export default {
             });
 
             contract.totalCost = summary;
-            //contract.totalCurrency = getWordEnding(contract.totalCost, 'Рубль', 'Рубля', 'Рублей');
-            //contract.balanceCurrency = getWordEnding(contract.balance, 'Рубль', 'Рубля', 'Рублей');
             contract.services.sort((a, b) => a.status < b.status && 1 || -1);
           });
 

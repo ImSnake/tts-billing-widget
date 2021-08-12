@@ -1,7 +1,6 @@
 <script>
 import { ref } from "vue";
 import { requestSessionsData } from "@/requests/api";
-import { dayTimeFullFormat } from "@/helpers/helpers";
 
 export default {
   name: "Sessions",
@@ -34,35 +33,14 @@ export default {
 
         hydraResponse.then((result) => {
 
-          let sortedData = result;
+          if(result.statusCode === 500) {
+            console.log('ОШИБКА ПОЛУЧЕНИЯ ДАННЫХ');
+            console.log(result);
+            return;
+          }
 
-          this.getUserParams(sortedData.slice(-1).pop());
-
-          sortedData.forEach(session => {
-              session.dateStart    = dayTimeFullFormat(new Date(session.D_START));
-              session.dateFinish   = dayTimeFullFormat(new Date(session.D_FINISH));
-              session.dateLastUpd  = dayTimeFullFormat(new Date(session.D_LAST_UPD));
-              session.dateLastLoad = dayTimeFullFormat(new Date(session.D_LAST_LOAD));
-
-              session.username      = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80601).VC_VALUE;
-              session.password      = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80701).VC_VALUE;
-              session.speedDownload = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180101).VC_VALUE;
-              session.speedUpload   = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180201).VC_VALUE;
-              session.serviceState  = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 80801).VC_VALUE;
-              session.authScheme    = session.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID === 180301).VC_VALUE;
-
-              session.multiSessionId   = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'Acct-Multi-Session-Id').VC_VALUE;
-              session.callingStationId = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'Calling-Station-Id').VC_VALUE;
-              session.framedIPAddress  = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'Framed-IP-Address').VC_VALUE;
-              session.framedUser       = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'Framed-User').VC_VALUE;
-              session.nasIPAddress     = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'NAS-IP-Address').VC_VALUE;
-              session.nasIdentifier    = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'NAS-Identifier').VC_VALUE;
-              session.nasPortId        = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'NAS-Port-Id').VC_VALUE;
-              session.packetSrcIPAddr  = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'Packet-Src-IP-Address').VC_VALUE;
-              session.userName         = session.T_ATTRIBUTES.find(el => el.VC_KEY === 'User-Name').VC_VALUE;
-          });
-
-          this.sessionsData = sortedData;
+          this.getUserParams(result[0]);
+          this.sessionsData = result;
           console.log(this.sessionsData);
         });
       }
@@ -70,8 +48,8 @@ export default {
 
     getUserParams(dataToGet) {
       this.$emit('updateUserParams', {
-        login: dataToGet.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID == 80601).VC_VALUE,
-        password: dataToGet.PROFILE_ATTR.find(el => el.N_ATTRIBUTE_ID == 80701).VC_VALUE,
+        login: dataToGet.username,
+        password: dataToGet.password
       });
     }
 
@@ -99,9 +77,9 @@ export default {
           <td class="td">
             <div class="elz d-block bold">Завершена</div>
           </td>
-          <!--<td class="td">
+          <td class="td">
             <div class="elz d-block bold">Состояние</div>
-          </td>-->
+          </td>
           <td class="td">
             <div class="elz d-block bold">Абонентское оборудование</div>
           </td>
@@ -182,57 +160,57 @@ export default {
           <td class="td">
             <div class="elz d-block bold">Packet-Src-IP-Address</div>
           </td>
-          <td class="td">
+          <!--<td class="td">
             <div class="elz d-block bold">User-Name</div>
-          </td>
+          </td>-->
         </tr>
         </thead>
         <tbody class="elz tbody pad p8 stripOdd stripHover">
         <tr v-for="(sessionItem, index) in sessionsData" class="tr">
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.VC_EXT_ID }}</div>
+            <div class="elz d-block">{{ sessionItem.externalIDString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.VC_TYPE_NAME }}</div>
+            <div class="elz d-block">{{ sessionItem.sessionTypeString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.dateStart }}</div>
+            <div class="elz d-block">{{ sessionItem.sessionStartDateTime }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.dateFinish }}</div>
-          </td>
-          <!--<td class="td">
-            <div class="elz d-block">???</div>
-          </td>-->
-          <td class="td">
-            <div class="elz d-block">{{ sessionItem.VC_CUSTOMER_EQUIPMENT }}</div>
+            <div class="elz d-block">{{ sessionItem.sessionFinishDateTime }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">???</div>
+            <div class="elz d-block">{{ sessionItem.sessionStatusName }}</div>
           </td>
-          <!--<td class="td">
-            <div class="elz d-block">???</div>
-          </td>-->
           <td class="td">
-            <div class="elz d-block">???</div>
+            <div class="elz d-block">{{ sessionItem.customerEquipmentName }}</div>
+          </td>
+          <td class="td">
+            <div class="elz d-block">{{ sessionItem.providerEquipmentName }}</div>
           </td>
           <!--<td class="td">
             <div class="elz d-block">???</div>
           </td>-->
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.dateLastUpd }}</div>
+            <div class="elz d-block">{{ sessionItem.providerProfileId }}</div>
+          </td>
+          <!--<td class="td">
+            <div class="elz d-block">???</div>
+          </td>-->
+          <td class="td">
+            <div class="elz d-block">{{ sessionItem.sessionLastUpdateDateTime }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.dateLastLoad }}</div>
+            <div class="elz d-block">{{ sessionItem.sessionLastLoadDateTime }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.VC_SRC_APP }}</div>
+            <div class="elz d-block">{{ sessionItem.sourceName }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.VC_LOAD_SEANCE_ID }}</div>
+            <div class="elz d-block">{{ sessionItem.loadSeanceIdString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.VC_TERMINATION_CODE }}</div>
+            <div class="elz d-block">{{ sessionItem.terminationReasonName }}</div>
           </td>
 
 
@@ -257,35 +235,35 @@ export default {
 
 
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.multiSessionId }}</div>
+            <div class="elz d-block">{{ sessionItem.multiSessionIdString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.callingStationId }}</div>
+            <div class="elz d-block">{{ sessionItem.callingStationIdString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.framedIPAddress }}</div>
+            <div class="elz d-block">{{ sessionItem.framedIPAddressString }}</div>
           </td>
           <td class="td">
             <div class="elz d-block">{{ sessionItem.framedUser }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.nasIPAddress }}</div>
+            <div class="elz d-block">{{ sessionItem.nasIPAddressString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.nasIdentifier }}</div>
+            <div class="elz d-block">{{ sessionItem.nasIdString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.nasPortId }}</div>
+            <div class="elz d-block">{{ sessionItem.nasPortIdString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">???</div>
+            <div class="elz d-block">{{ sessionItem.sessionNasTypeString }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.packetSrcIPAddr }}</div>
+            <div class="elz d-block">{{ sessionItem.packetSrcIPAddrString }}</div>
           </td>
-          <td class="td">
+          <!--<td class="td">
             <div class="elz d-block">{{ sessionItem.userName }}</div>
-          </td>
+          </td>-->
         </tr>
         </tbody>
       </table>

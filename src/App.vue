@@ -50,6 +50,13 @@ export default {
       if (this.ttsId) {
         const hydraResponse = requestCustomerData(this.ttsId);
         hydraResponse.then((result) => {
+
+          if(result.statusCode === 500) {
+            console.log('ОШИБКА ПОЛУЧЕНИЯ ДАННЫХ');
+            console.log(result);
+            return;
+          }
+
           this.customerData = result;
           console.log(this.customerData);
         });
@@ -130,14 +137,13 @@ export default {
       :ttsId="ttsId"
       @update-user-params="updateUserParams"   >
   </Sessions>
-
 </template>
 
 
 <style src="./assets/styles/_style.css"></style>
 
 <style>
-.red__color{
-  color: red;
-}
+  .red__color {
+    color: red;
+  }
 </style>

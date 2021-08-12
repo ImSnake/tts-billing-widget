@@ -1,7 +1,6 @@
 <script>
 import { ref } from "vue";
 import { requestAccountData } from "@/requests/api";
-import { numberFormat } from "@/helpers/helpers";
 
 export default {
   name: "Account",
@@ -36,20 +35,13 @@ export default {
 
         hydraResponse.then((result) => {
 
-          let sortedData = result;
+          if(result.statusCode === 500) {
+            console.log('ОШИБКА ПОЛУЧЕНИЯ ДАННЫХ');
+            console.log(result);
+            return;
+          }
 
-          sortedData.forEach(account => {
-           account.payment.reverse().forEach(payment => {
-              payment.paymentSum     = numberFormat(payment.N_SUM_OUT, 2, '.', ' ');
-              payment.accountBalance = numberFormat(payment.N_BALANCE, 2, '.', ' ');
-              payment.dateStart      = new Date(payment.D_BEGIN).toISOString().split('T')[0];
-              payment.dateFinish     = new Date(payment.D_END).toISOString().split('T')[0];
-              payment.dateOperation  = new Date(payment.D_OPER).toISOString().split('T')[0];
-            });
-          });
-
-          this.accountData = sortedData;
-          //console.log(result);
+          this.accountData = result;
           console.log(this.accountData);
         });
       }
@@ -336,14 +328,22 @@ export default {
          <template v-for="accountItem in accountData">
            <tr v-for="paymentItem in accountItem.payment" class="tr">
              <td class="td">
-               <div class="d-block pL32">{{ accountItem.vcCode }}</div>
+               <div class="d-block pL32">{{ accountItem.accountNumber }}</div>
              </td>
-             <td class="td"><div class="d-block pL32">{{ paymentItem.VC_GOOD_NAME }}</div></td>
+             <td class="td">
+               <div class="d-block pL32">{{ paymentItem.paidServiceName }}</div>
+             </td>
              <td class="td bold al-right">{{ paymentItem.paymentSum }}</td>
-             <td class="td"><div class="d-block pL32">{{ paymentItem.dateStart }}</div></td>
-             <td class="td"><div class="d-block pL32">{{ paymentItem.dateFinish }}</div></td>
+             <td class="td">
+               <div class="d-block pL32">{{ paymentItem.paidPeriodBeginDateTime }}</div>
+             </td>
+             <td class="td">
+               <div class="d-block pL32">{{ paymentItem.paidPeriodEndDateTime }}</div>
+             </td>
              <td class="td al-right">{{ paymentItem.accountBalance }}</td>
-             <td class="td"><div class="d-block pL32">{{ paymentItem.dateOperation }}</div></td>
+             <td class="td">
+               <div class="d-block pL32">{{ paymentItem.payOperationDateTime }}</div>
+             </td>
            </tr>
          </template>
          </tbody>
