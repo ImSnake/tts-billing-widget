@@ -42,7 +42,7 @@ export default {
           }
 
           this.accountData = result;
-          console.log(this.accountData);
+          //console.log(this.accountData);
         });
       }
     },

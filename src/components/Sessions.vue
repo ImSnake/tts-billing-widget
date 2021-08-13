@@ -41,7 +41,7 @@ export default {
 
           this.getUserParams(result[0]);
           this.sessionsData = result;
-          console.log(this.sessionsData);
+          //console.log(this.sessionsData);
         });
       }
     },

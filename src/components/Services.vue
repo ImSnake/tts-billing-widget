@@ -1,6 +1,7 @@
 <script>
 import { ref } from "vue";
 import { requestServicesData } from "@/requests/api";
+import { numberFormat } from "@/helpers/helpers"
 
 export default {
   name: "Services",
@@ -16,9 +17,11 @@ export default {
   },
 
   setup() {
-    const bookmarkIsActive = ref(true);
+    const bookmarkIsActive = ref(false);
     return { bookmarkIsActive };
   },
+
+  emits: ['servicesIsLoaded'],
 
   data() {
     return {
@@ -32,13 +35,8 @@ export default {
 
   methods: {
 
-    toggleTableWrapper(refName) {
-      this.$refs[refName].classList.toggle('sel');
-    },
-
     getServicesData() {
       if (this.ttsId) {
-
         const hydraResponse = requestServicesData(this.ttsId);
 
         hydraResponse.then((result) => {
@@ -49,7 +47,39 @@ export default {
             return;
           }
 
-          let sortedData = result;
+          let sortedData = [];
+          result.forEach((item) => {
+
+            const contractItem = {
+              sdContractId: item.sdContractId,
+              accountNumber: item.accountNumber,
+              contractNumber: item.contractNumber,
+              accountBalance: numberFormat(item.accountBalance, 2, '.', ' '),
+              tariffZoneName: item.tariffZoneName,
+              contractTypeName: item.contractTypeName,
+              services: [],
+              totalCost: 0,
+            };
+
+            const serviceItem = {
+              serviceName: item.serviceName,
+              serviceStatusName: item.serviceStatusName,
+              serviceMonthlyCost: item.serviceMonthlyCost,
+              servicePeriodBeginDateTime: item.servicePeriodBeginDateTime,
+              servicePeriodEndDateTime:item.servicePeriodEndDateTime,
+            };
+
+            if (sortedData.length < 1 || !sortedData.find(el => el.sdContractId === item.sdContractId)) {
+              contractItem.services.push(serviceItem);
+              sortedData.push(contractItem);
+            } else {
+              for (let value of sortedData) {
+                if (value.sdContractId === item.sdContractId) {
+                  value.services.push(serviceItem);
+                }
+              }
+            }
+          });
 
           const currentDate = new Date().toISOString().split('T')[0];
 
@@ -59,27 +89,29 @@ export default {
 
             contract.services.forEach(service => {
               //console.log(service.dEnd >= currentDate || !service.dEnd);
-              if (service.dEnd >= currentDate || !service.dEnd) {
-                summary += service.price;
+              if (service.servicePeriodEndDateTime >= currentDate || !service.servicePeriodEndDateTime) {
+                summary += service.serviceMonthlyCost;
                 service.status = 1;
               } else {
                 service.status = 0;
               }
-
-              service.dBegin = new Date(service.dBegin).toISOString().split('T')[0];
-              service.dEnd = (service.dEnd) ? new Date(service.dEnd).toISOString().split('T')[0] : '-';
+              service.servicePeriodEndDateTime = (service.servicePeriodEndDateTime) ? service.servicePeriodEndDateTime : '-';
+              service.serviceMonthlyCost = numberFormat(service.serviceMonthlyCost, 2, '.', ' ');
             });
 
-            contract.totalCost = summary;
+            contract.totalCost = numberFormat(summary, 2, '.', ' ');
             contract.services.sort((a, b) => a.status < b.status && 1 || -1);
           });
 
           this.servicesData = sortedData;
-
-          //console.log(result);
-          console.log(this.servicesData);
+          this.$emit('servicesIsLoaded');
+          //console.log(this.servicesData);
         });
       }
+    },
+
+    toggleTableWrapper(refName) {
+      this.$refs[refName].classList.toggle('sel');
     },
 
   },
@@ -97,30 +129,29 @@ export default {
         <tr class="tr">
           <td class="td w1 h56">
             <div class="elz d-flex a-X s16 bor2 br br-green rCircle">
-              <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Активный"
-                   style="--elzMsk: url('https://lelouch.ru/uploads/icons/play.svg');"></div>
+              <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-green bgBef-CC cur-help" title="Активный" style="--elzMsk: url('https://lelouch.ru/uploads/icons/play.svg');"></div>
             </div>
           </td>
           <td class="td wmn200">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4">Договор: <b class="bold">{{ contractItem.contract }}</b></div>
+                <div class="elz d-block mL8 mT4">Договор: <b class="bold">{{ contractItem.contractNumber }}</b></div>
               </div>
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4">Тип: <b class="bold">{{ contractItem.typeName }}</b></div>
+                <div class="elz d-block mL8 mT4">Тип: <b class="bold">{{ contractItem.contractTypeName }}</b></div>
                 </div>
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4">Тарифная зона: <b class="bold">{{ contractItem.zone }}</b></div>
+                <div class="elz d-block mL8 mT4">Тарифная зона: <b class="bold">{{ contractItem.tariffZoneName }}</b></div>
               </div>
             </div>
           </td>
           <td class="td w180 wmn180">
             <div class="elz d-block mL-8 mT-4">
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4 nowrap">Баланс:&nbsp;<b class="bold">{{ contractItem.balance + '&nbsp;₽' }}</b></div>
+                <div class="elz d-block mL8 mT4 nowrap">Баланс:&nbsp;<b class="bold">{{ contractItem.accountBalance + '&nbsp;₽' }}</b></div>
               </div>
               <div class="elz d-flex f-wrap">
-                <div class="elz d-block mL8 mT4 nowrap">Лицевой счет:&nbsp;<b class="bold">{{ contractItem.account }}</b></div>
+                <div class="elz d-block mL8 mT4 nowrap">Лицевой счет:&nbsp;<b class="bold">{{ contractItem.accountNumber }}</b></div>
               </div>
             </div>
           </td>
@@ -148,11 +179,11 @@ export default {
               <div class="elz d-block p-rel mskBef s8 cFillBef fn fn-grey bgBef-CC cur-help" title="Услуга заблокирована" style="--elzMsk: url('https://lelouch.ru/uploads/icons/cross.svg');"></div>
             </div>
           </td>
-          <td class="td">{{ servicesItem.service }}</td>
-          <td class="td">{{ servicesItem.service_lock }}</td>
-          <td class="td bold al-right nowrap">{{ servicesItem.price }}</td>
-          <td class="td">{{ servicesItem.dBegin }}</td>
-          <td class="td">{{ servicesItem.dEnd }}</td>
+          <td class="td">{{ servicesItem.serviceName }}</td>
+          <td class="td">{{ servicesItem.serviceStatusName }}</td>
+          <td class="td bold al-right nowrap">{{ servicesItem.serviceMonthlyCost }}</td>
+          <td class="td">{{ servicesItem.servicePeriodBeginDateTime }}</td>
+          <td class="td">{{ servicesItem.servicePeriodEndDateTime }}</td>
           <!--<td class="td">???</td>-->
         </tr>
         </tbody>
