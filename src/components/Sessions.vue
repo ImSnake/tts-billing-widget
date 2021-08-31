@@ -48,8 +48,8 @@ export default {
 
     getUserParams(dataToGet) {
       this.$emit('updateUserParams', {
-        login: dataToGet.username,
-        password: dataToGet.password
+        login: dataToGet.lkUsername,
+        password: dataToGet.lkPass
       });
     }
 
@@ -63,7 +63,7 @@ export default {
     <div class="elz d-table w100p pH16 pB16">
 
       <table class="elz elzTable w100p mT16 va-M fn-9 lh-12 r3 bsh-default1 uStrip stripLD borNoneIn nowrap   bg bg-primary bgL5">
-        <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-primary brL-5 brFD brLF20">
+        <thead class="elz tbody pad p8 pV10 p-sticky p-T z1 bor borB2 br br-secondary bg bg-secondary fn fn-secondary-t brL-5 brFD brLF20">
         <tr class="tr">
           <td class="td">
             <div class="elz d-block bold">Внешний идентификатор</div>
@@ -215,10 +215,10 @@ export default {
 
 
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.username }}</div>
+            <div class="elz d-block">{{ sessionItem.sessionUsername }}</div>
           </td>
           <td class="td">
-            <div class="elz d-block">{{ sessionItem.password }}</div>
+            <div class="elz d-block">{{ sessionItem.sessionPassword }}</div>
           </td>
           <td class="td">
             <div class="elz d-block">{{ sessionItem.speedDownload }}</div>

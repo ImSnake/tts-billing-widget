@@ -23,6 +23,9 @@
     --c-black-H:         0; --c-black-S:         0%; --c-black-L:        0%;
     --c-white-H:         0; --c-white-S:         0%; --c-white-L:      100%;
 
+    --c-male-H:    225; --c-male-S:    71%; --c-male-L:   40%;
+    --c-female-H:  300; --c-female-S: 100%; --c-female-L: 37%;
+
 
 
     /* Engine panel colors */
@@ -70,7 +73,7 @@
     --c-primary-inv-H:   0; --c-primary-inv-S:   0%; --c-primary-inv-L:   30%;
     --c-primary-inv-t-H: 0; --c-primary-inv-t-S: 0%; --c-primary-inv-t-L: 90%;
 
-    --c-secondary-H:   0; --c-secondary-S:   0%; --c-secondary-L:   30%;
+    --c-secondary-H:   0; --c-secondary-S:   0%; --c-secondary-L:   40%;
     --c-secondary-t-H: 0; --c-secondary-t-S: 0%; --c-secondary-t-L: 90%;
 
     --c-secondary-inv-H:   0; --c-secondary-inv-S:   0%; --c-secondary-inv-L:   30%;
@@ -101,38 +104,36 @@
 
 .elzTheme-light {
     /* Theme colors */
+
 }
 
 .elzTheme-dark {
     /* Theme colors */
 
-    --c-primary-H:   223; --c-primary-S:   7%; --c-primary-L: 20%;
-    --c-primary-t-H: 0; --c-primary-t-S: 0%; --c-primary-t-L: 88%;
+    --c-primary-H:   223; --c-primary-S:   7%; --c-primary-L:   20%;
+    --c-primary-t-H: 223; --c-primary-t-S: 7%; --c-primary-t-L: 88%;
 
     --c-primary-inv-H:   0; --c-primary-inv-S:   0%; --c-primary-inv-L:   90%;
     --c-primary-inv-t-H: 0; --c-primary-inv-t-S: 0%; --c-primary-inv-t-L: 30%;
 
-    --c-secondary-H:   0; --c-secondary-S:   0%; --c-secondary-L:   90%;
-    --c-secondary-t-H: 0; --c-secondary-t-S: 0%; --c-secondary-t-L: 30%;
+    --c-secondary-H:   223; --c-secondary-S:   7%; --c-secondary-L:   10%;
+    --c-secondary-t-H: 223; --c-secondary-t-S: 7%; --c-secondary-t-L: 90%;
 
     --c-secondary-inv-H:   0; --c-secondary-inv-S:   0%; --c-secondary-inv-L:   90%;
     --c-secondary-inv-t-H: 0; --c-secondary-inv-t-S: 0%; --c-secondary-inv-t-L: 30%;
-/*
-    --c-brand-H: 227; --c-brand-S:  50%; --c-brand-L:   45%;
+    /*
+        --c-brand-H: 227; --c-brand-S:  50%; --c-brand-L:   45%;
 
-    --c-ok-H: 207; --c-ok-S:  90%; --c-ok-L:   35%;
+        --c-ok-H: 207; --c-ok-S:  90%; --c-ok-L:   35%;
 
-    --c-success-H: 122; --c-success-S:  39%; --c-success-L:   35%;
+        --c-success-H: 122; --c-success-S:  39%; --c-success-L:   35%;
 
-    --c-warning-H:  54; --c-warning-S:  80%; --c-warning-L:   45%;
+        --c-warning-H:  54; --c-warning-S:  80%; --c-warning-L:   45%;
 
-    --c-danger-H:  36; --c-danger-S:  100%; --c-danger-L:   40%;
+        --c-danger-H:  36; --c-danger-S:  100%; --c-danger-L:   40%;
 
-    --c-error-H:   4; --c-error-S:  70%; --c-error-L:   50%;
-
- */
-}
-
-.elzTheme-light.subTheme-blevota {
-    --c-primary-H:   54; --c-primary-S:   61%; --c-primary-L:   90%;
+        --c-error-H:   4; --c-error-S:  70%; --c-error-L:   50%;
+     */
+    --c-male-L:   70%;
+    --c-female-L: 67%;
 }
