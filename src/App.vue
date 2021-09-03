@@ -4,6 +4,7 @@ import { requestCustomerData } from "@/requests/api";
 import Account from "@/components/Account";
 import Services from "@/components/Services";
 import Sessions from "@/components/Sessions";
+import DataLoadingError from "@/components/slots/DataLoadingError";
 
 export default {
   name: "BillingWidget",
@@ -11,20 +12,19 @@ export default {
     Account,
     Services,
     Sessions,
+    DataLoadingError
   },
 
   setup() {
-    //97118
-    //98339
-    //99206
     const dataIsLoaded = ref(false);
     return { dataIsLoaded };
   },
 
   data() {
     return {
-      customerData: {},
       ttsId: new URL(location.href).searchParams.get("CustomerID"),
+
+      customerData: {},
       userParams: {},
 
       animationIsShown: false,
@@ -59,17 +59,15 @@ export default {
       if (this.ttsId) {
         const hydraResponse = requestCustomerData(this.ttsId);
         hydraResponse.then((result) => {
-
           if(result.statusCode === 500) {
-            console.log('ОШИБКА ПОЛУЧЕНИЯ ДАННЫХ');
+            console.log('ОШИБКА ПОЛУЧЕНИЯ ДАННЫХ ПО ЗАПРОСУ getCustomerData');
             console.log(result);
+            this.customerData = false;
             return;
           }
-
           this.customerData = result;
           this.headerIsLoaded = true;
           this.checkDataIsReady;
-          //console.log(this.customerData);
         });
       }
     },
@@ -104,7 +102,6 @@ export default {
       this.userParams = userParams;
       this.userParamsIsLoaded = true;
       this.checkDataIsReady;
-      //console.log(this.userParams);
     },
 
   },
@@ -149,22 +146,27 @@ export default {
   </div>
 
   <div v-if="dataIsLoaded" class="elz d-block pAT16 lh-12">
-    <div class="elz d-block fn-16 pB8">{{ customerData.CustomerName }}</div>
-    <div class="elz d-flex f-wrap mL-16 pB16">
-      <div class="elz d-block mL16 mT8">SDN:
-        <a :href="'http://sdn.naukanet.ru/customers/customer/'+customerData.CustomerID" target="_blank"
-           class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.CustomerID }}</a>
+    <template v-if="customerData">
+      <div class="elz d-block fn-16 pB8">{{ customerData.CustomerName }}</div>
+      <div class="elz d-flex f-wrap mL-16 pB16">
+        <div class="elz d-block mL16 mT8">SDN:
+          <a :href="'http://sdn.naukanet.ru/customers/customer/'+customerData.CustomerID" target="_blank"
+             class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.CustomerID }}</a>
+        </div>
+        <div class="elz d-block mL16 mT8">HYDRA:
+          <a :href="'https://hydra.naukanet.ru:8000/subjects/users/edit/'+customerData.UBN" target="_blank"
+             class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.UBN }}</a>
+        </div>
+        <div class="elz d-block mL16 mT8">Телефон:&nbsp;
+          <b :class="[!customerData.CustomerPhone ? 'fn fn-error' : '']" class="bold nowrap">{{ customerData.CustomerPhone ? customerData.CustomerPhone : 'нет&nbsp;данных' }}</b>
+        </div>
+        <div class="elz d-block mL16 mT8">Адрес:&nbsp;
+          <b :class="[!customerData.CustomerPhone ? 'fn fn-error' : '']" class="bold">{{ customerData.LegalAdress ? customerData.LegalAdress : '&nbsp;нет&nbsp;данных' }}</b></div>
       </div>
-      <div class="elz d-block mL16 mT8">HYDRA:
-        <a :href="'https://hydra.naukanet.ru:8000/subjects/users/edit/'+customerData.UBN" target="_blank"
-           class="elz bold cur-pointer opAct07 underline noDecHov fn fn-link-inline fnHovL-10 fnHovLInvD">{{ customerData.UBN }}</a>
-      </div>
-      <div class="elz d-block mL16 mT8">Телефон:&nbsp;
-        <b :class="[!customerData.CustomerPhone ? 'fn fn-error' : '']" class="bold nowrap">{{ customerData.CustomerPhone ? customerData.CustomerPhone : 'нет&nbsp;данных' }}</b>
-      </div>
-      <div class="elz d-block mL16 mT8">Адрес:&nbsp;
-        <b :class="[!customerData.CustomerPhone ? 'fn fn-error' : '']" class="bold">{{ customerData.LegalAdress ? customerData.LegalAdress : '&nbsp;нет&nbsp;данных' }}</b></div>
-    </div>
+    </template>
+    <template v-else>
+      <DataLoadingError :requestName="'Имя и данные клиента'"></DataLoadingError>
+    </template>
   </div>
 
   <div v-if="dataIsLoaded" class="elz h48 borB1 br br-primary brL-20 brLInvD brLF-10 brFD">
